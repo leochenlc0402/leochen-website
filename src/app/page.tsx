@@ -45,8 +45,8 @@ export default function Home() {
               </span>
             </h1>
             <p className="mt-6 text-base sm:text-lg text-coffee/70 dark:text-parchment/70 max-w-md leading-relaxed">
-              {profile.title}，長期投入性別平等、多元性別與公共溝通的演講與內容創作，
-              國台語雙聲道、把議題講得清楚也講得有笑聲。
+              演講主題：性別平等 × 多元性別 × 公共溝通 × 社群創作
+              <span className="block mt-2 text-sm opacity-60">（自我介紹文字待里歐提供）</span>
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link

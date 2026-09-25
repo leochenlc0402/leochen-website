@@ -2,6 +2,13 @@
 // 來源：leo-brief-2026-09-25.pdf 頁面二末段（四欄：企業／政府／學校／NGO），
 // 以 pdftotext -layout 與逐欄核對兩種方式交叉確認後逐字抄錄。
 // 沒有 logo 素材，一律用文字牆呈現。
+//
+// 不確定事項（PDF 表格跨頁換行，無法從純文字排版 100% 判斷斷行處是否為同一個名稱）：
+// 1.「Jardine」與「Restaurant Group」在原文連續兩行、無標點分隔，這裡當成同一家公司
+//    「Jardine Restaurant Group」（確有同名連鎖餐飲集團）處理，但不排除是兩個獨立品牌。
+// 2.「Disabled+Queer」與「桃緣彩虹居所」同樣連續兩行、無標點分隔，這裡當成同一個單位處理，
+//    但也可能是兩個獨立單位（分見 ngoClients）。
+// 兩項已列入完成回報的「不確定事項」，請里歐確認後再調整。
 
 export const corporateClients: string[] = [
   "Dell",

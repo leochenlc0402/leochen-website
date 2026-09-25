@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: `%s｜${profile.displayName}`,
   },
   description:
-    "陳荐宏 Leo Chen，性平講師與社群媒體創作者，累積 80 多場演講經驗，長期投入性別平等、多元性別與公共溝通議題的分享與內容創作。",
+    "陳荐宏 Leo Chen，性平講師 × 社群媒體創作者。演講主題：性別平等、多元性別、公共溝通、社群創作。演講邀約請來信。",
   openGraph: {
     title: `${profile.displayName} — ${profile.title}`,
     description:
