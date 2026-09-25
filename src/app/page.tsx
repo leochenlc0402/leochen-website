@@ -1,69 +1,220 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import Section from "@/components/Section";
+import Marquee from "@/components/Marquee";
+import Placeholder from "@/components/Placeholder";
+import { profile } from "@/data/profile";
+import { stats } from "@/data/stats";
+import {
+  workExperience,
+  education,
+  publicService,
+  privateService,
+  qualifications,
+  hostingNote,
+  publishedBook,
+  policyConsulting,
+  papers,
+} from "@/data/experience";
+
+export const metadata: Metadata = {
+  title: `${profile.displayName} — ${profile.title}`,
+  description:
+    "陳荐宏 Leo Chen 的個人網站：80 多場演講經歷、性別平等與多元性別講題、工作經歷與出版研究總覽。",
+  openGraph: {
+    title: `${profile.displayName} — ${profile.title}`,
+    description: "80 多場演講經歷，性別平等與多元性別講師陳荐宏 Leo Chen 個人網站首頁。",
+    type: "profile",
+  },
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+    <div>
+      {/* Hero */}
+      <section className="px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-16">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+          <div className="animate-fade-up">
+            <p className="text-xs tracking-[0.3em] uppercase text-clay mb-4">
+              性平講師 × 社群媒體創作者
+            </p>
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              {profile.nameZh}
+              <span className="block text-2xl sm:text-3xl font-normal text-coffee/70 dark:text-parchment/70 mt-2">
+                {profile.nameEn}
+              </span>
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-coffee/70 dark:text-parchment/70 max-w-md leading-relaxed">
+              {profile.title}，長期投入性別平等、多元性別與公共溝通的演講與內容創作，
+              國台語雙聲道、把議題講得清楚也講得有笑聲。
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                href="/speaking"
+                className="px-6 py-3 bg-accent hover:bg-accent-hover text-parchment text-sm font-medium tracking-wide transition-colors"
+              >
+                邀請演講
+              </Link>
+              <Link
+                href="/media"
+                className="px-6 py-3 border border-coffee/20 dark:border-parchment/20 text-sm font-medium tracking-wide hover:border-accent hover:text-accent transition-colors"
+              >
+                看媒體影音
+              </Link>
+            </div>
+          </div>
+          <div className="relative">
+            {/* eslint-disable-next-line @next/next/no-img-element -- 純占位 SVG，不需影像最佳化 */}
+            <img
+              src={profile.heroImagePlaceholder}
+              alt="陳荐宏形象照待補"
+              width={480}
+              height={600}
+              className="w-full h-auto border border-sand"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* 四格數據 */}
+      <Section title="用場次說話" eyebrow="Track Record">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              className="border border-sand p-6 text-center sm:text-left"
+            >
+              <p className="font-heading text-3xl sm:text-4xl font-bold text-accent">
+                {s.value}
+              </p>
+              <p className="mt-2 text-sm text-coffee/60 dark:text-parchment/60">
+                {s.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* 回饋跑馬燈 */}
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <Marquee />
+        </div>
+      </div>
+
+      {/* 照片牆 */}
+      <Section title="照片牆" eyebrow="Gallery">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <Placeholder key={i} label="照片待補" />
+          ))}
+        </div>
+      </Section>
+
+      {/* 工作經歷 */}
+      <Section title="工作經歷" eyebrow="Experience">
+        <ul className="space-y-4">
+          {workExperience.map((item) => (
+            <li
+              key={item.org}
+              className="border-l-2 border-clay pl-4 sm:pl-6"
+            >
+              <p className="font-medium">{item.org}</p>
+              <p className="text-sm text-coffee/60 dark:text-parchment/60">
+                {item.role}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* 學歷 */}
+      <Section title="學歷" eyebrow="Education" tone="dark">
+        <ul className="space-y-4">
+          {education.map((item) => (
+            <li key={item.school} className="border-l-2 border-clay pl-4 sm:pl-6">
+              <p className="font-medium">{item.school}</p>
+              <p className="text-sm text-parchment/60">{item.degree}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* 服務與參與 */}
+      <Section title="服務與參與" eyebrow="Service">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div>
+            <h3 className="font-heading text-lg font-semibold mb-4">
+              公部門服務經歷
+            </h3>
+            <ul className="space-y-3 text-sm text-coffee/75 dark:text-parchment/75 leading-relaxed">
+              {publicService.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-heading text-lg font-semibold mb-4">
+              民間組織服務經歷
+            </h3>
+            <ul className="space-y-3 text-sm text-coffee/75 dark:text-parchment/75 leading-relaxed">
+              {privateService.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-heading text-lg font-semibold mb-4">
+              其他專業資格
+            </h3>
+            <ul className="space-y-3 text-sm text-coffee/75 dark:text-parchment/75 leading-relaxed">
+              {qualifications.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      {/* 主持經歷 */}
+      <Section title="主持經歷" eyebrow="Hosting">
+        <p className="text-coffee/60 dark:text-parchment/60">（{hostingNote}）</p>
+      </Section>
+
+      {/* 出版與研究 */}
+      <Section title="出版與研究" eyebrow="Publications" tone="dark">
+        <div className="space-y-12">
+          <div>
+            <h3 className="font-heading text-lg font-semibold mb-3">
+              性別專書出版
+            </h3>
+            <p className="text-sm text-parchment/80 leading-relaxed">
+              {publishedBook.authors}《{publishedBook.title}》(ISBN:
+              {publishedBook.isbn})
+            </p>
+          </div>
+          <div>
+            <h3 className="font-heading text-lg font-semibold mb-3">
+              政策諮詢與專案顧問
+            </h3>
+            <ul className="space-y-3 text-sm text-parchment/80 leading-relaxed">
+              {policyConsulting.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-heading text-lg font-semibold mb-3">
+              論文與學術發表
+            </h3>
+            <ul className="space-y-3 text-sm text-parchment/80 leading-relaxed">
+              {papers.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }

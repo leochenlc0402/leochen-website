@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
+/*
+  色票：大地色系（暖沙／陶土／橄欖／深咖啡）＋一個高對比 accent（莓紅）。
+  依 rules/anti-ai-visual.md 的方向：避免「暖米底＋宋體大標＋單一暖色 accent」這個
+  AI 生成設計最常見的預設長相——所以底色不是最淺的那個值當主背景，
+  深咖啡與陶土／橄欖三色都有實際的版面工作（分區塊、分層級），不是純裝飾。
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-parchment: #f6efe0; /* 淺底，卡片與淺色版塊 */
+  --color-sand: #e8dabf; /* 暖沙，次要底色／邊框 */
+  --color-clay: #b5592e; /* 陶土，次要強調／標籤 */
+  --color-olive: #5b6a45; /* 橄欖，連結與次要文字 */
+  --color-coffee: #2a2018; /* 深咖啡，主要文字與深底 */
+  --color-accent: #a5283f; /* 莓紅，唯一高對比 accent：CTA、重點 */
+  --color-accent-hover: #841f31;
+
+  --background: var(--color-parchment);
+  --foreground: var(--color-coffee);
 }
 
 @theme inline {
+  --color-parchment: var(--color-parchment);
+  --color-sand: var(--color-sand);
+  --color-clay: var(--color-clay);
+  --color-olive: var(--color-olive);
+  --color-coffee: var(--color-coffee);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-noto-serif-tc);
+  --font-body: var(--font-noto-sans-tc);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-coffee);
+    --foreground: var(--color-parchment);
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), "Noto Sans TC", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), "Noto Serif TC", serif;
+}
+
+/* 跑馬燈：滿版跑，hover 暫停，系統關動態時退成靜態清單（在元件端用 CSS 類別切換） */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 32s linear infinite;
+}
+
+.ticker-track:hover .animate-ticker {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* 進場動畫：一律 ease-out（先快後慢），對應 rules/motion-vocabulary.md §1 第 1 條 */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
 }
