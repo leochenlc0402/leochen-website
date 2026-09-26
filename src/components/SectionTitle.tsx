@@ -23,10 +23,10 @@ export default function SectionTitle({
         {formal}
       </span>
       <span
-        className={`block mt-2 ml-6 sm:ml-12 border-l-4 pl-3 font-body font-bold text-xl sm:text-2xl ${
+        className={`block mt-3 ml-6 sm:ml-12 border-l-2 pl-3 font-body font-normal text-base sm:text-lg tracking-wide ${
           isDark
-            ? "border-parchment text-parchment"
-            : "border-accent text-accent"
+            ? "border-parchment/60 text-parchment/85"
+            : "border-accent/70 text-accent"
         }`}
       >
         {casual}

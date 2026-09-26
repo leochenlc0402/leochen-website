@@ -41,7 +41,7 @@ export default function Home() {
                   </span>
                 ))}
               </span>
-              <span className="block text-balance font-body font-black text-accent text-3xl sm:text-4xl lg:text-5xl mt-2">
+              <span className="block font-heading font-semibold text-accent text-3xl sm:text-4xl lg:text-5xl mt-3">
                 {heroCasual}
               </span>
             </h1>
@@ -126,7 +126,7 @@ export default function Home() {
                 <p className="font-heading text-xl sm:text-2xl font-semibold text-coffee dark:text-parchment">
                   {card.title}
                 </p>
-                <p className="mt-2 ml-1 border-l-4 border-accent pl-3 font-body font-bold text-accent">
+                <p className="mt-2 ml-1 border-l-2 border-accent/70 pl-3 font-body font-normal text-sm tracking-wide text-accent">
                   {card.angle}
                 </p>
               </div>
