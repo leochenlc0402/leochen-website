@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div>
       {/* 首屏：Marquee Hero——只有主張句，沒有按鈕、沒有圖、沒有副標 */}
-      <section className="px-[var(--space-md)] sm:px-[var(--space-xl)] pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)] min-h-[68vh] flex flex-col justify-between">
+      <section className="px-[var(--space-md)] sm:px-[var(--space-xl)] pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)] min-h-[56vh] sm:min-h-[68vh] flex flex-col justify-between">
         <div className="max-w-[var(--container)] mx-auto w-full flex-1 flex flex-col justify-center">
           <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.1] tracking-[-0.01em] text-[length:var(--text-display)] text-[var(--color-ink)]">
             <span className="block">
