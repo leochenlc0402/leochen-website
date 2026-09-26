@@ -34,8 +34,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1.4fr_0.6fr] gap-10 items-center">
           <div className="animate-fade-up">
             <h1 className="leading-tight">
-              <span className="block text-balance font-heading font-bold text-4xl sm:text-5xl lg:text-7xl">
-                {heroFormal}
+              <span className="block font-heading font-bold text-4xl sm:text-5xl lg:text-7xl">
+                {heroFormal.split("，").filter(Boolean).map((seg, i) => (
+                  <span key={i} className="inline-block whitespace-nowrap">
+                    {seg}，
+                  </span>
+                ))}
               </span>
               <span className="block text-balance font-body font-black text-accent text-3xl sm:text-4xl lg:text-5xl mt-2">
                 {heroCasual}
