@@ -16,7 +16,7 @@ export default function SectionTitle({
       <span className="block font-[family-name:var(--font-display)] font-semibold text-[length:var(--text-2xl)] tracking-[-0.01em] text-[var(--color-ink)]">
         {formal}
       </span>
-      <span className="block mt-[var(--space-xs)] ml-[var(--space-sm)] font-[family-name:var(--font-voice)] font-normal text-[length:var(--text-base)] text-[var(--color-accent)]">
+      <span className="block mt-[var(--space-xs)] leading-[1.5] font-[family-name:var(--font-voice)] font-normal text-[length:var(--text-base)] text-[var(--color-accent)]">
         {casual}
       </span>
     </Tag>

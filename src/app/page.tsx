@@ -1,3 +1,4 @@
+/* Hallmark · genre: editorial · macrostructure: Marquee Hero · design-system: design.md · designed-as-app · nav: N1a · footer: Ft6 · pre-emit critique: P4 H4 E4 S4 R4 V4 */
 import type { Metadata } from "next";
 import Placeholder from "@/components/Placeholder";
 import CTALink from "@/components/CTALink";
@@ -34,7 +35,7 @@ export default function Home() {
   return (
     <div>
       {/* 首屏：Marquee Hero——只有主張句，沒有按鈕、沒有圖、沒有副標 */}
-      <section className="px-[var(--space-md)] sm:px-[var(--space-xl)] pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)] min-h-[56vh] sm:min-h-[68vh] flex flex-col justify-between">
+      <section className="px-[var(--space-md)] sm:px-[var(--space-xl)] pt-[var(--space-xl)] sm:pt-[var(--space-xl)] pb-[var(--space-2xl)] sm:pb-[var(--space-3xl)] min-h-[56vh] sm:min-h-[68vh] flex flex-col justify-between">
         <div className="max-w-[var(--container)] mx-auto w-full flex-1 flex flex-col justify-center">
           <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.1] tracking-[-0.01em] text-[length:var(--text-display)] text-[var(--color-ink)]">
             <span className="block">
@@ -47,8 +48,15 @@ export default function Home() {
                   </span>
                 ))}
             </span>
-            <span className="block text-[var(--color-accent)]">
-              {heroCasual}
+            <span className="block whitespace-nowrap">
+              {heroCasual.split("好玩").map((part, i, arr) => (
+                <span key={i}>
+                  {part}
+                  {i < arr.length - 1 && (
+                    <span className="text-[var(--color-accent)]">好玩</span>
+                  )}
+                </span>
+              ))}
             </span>
           </h1>
         </div>
@@ -76,14 +84,14 @@ export default function Home() {
 
       {/* 三個數字：一行純文字，不是格子 */}
       <Section padding="py-[var(--space-xl)]">
-        <p className="flex flex-wrap items-baseline gap-x-[var(--space-sm)] gap-y-[var(--space-xs)]">
+        <p className="flex flex-wrap items-baseline gap-x-[var(--space-lg)] gap-y-[var(--space-xs)]">
           {visibleStats.map((s, i) => (
             <span
               key={s.label}
               className="inline-flex items-baseline gap-[var(--space-xs)]"
             >
               {i > 0 && (
-                <span aria-hidden className="text-[var(--color-rule)]">
+                <span aria-hidden className="hidden sm:inline text-[var(--color-rule)]">
                   ・
                 </span>
               )}
@@ -100,9 +108,9 @@ export default function Home() {
 
       {/* 一句聽眾的話：T1 pull quote，允許出格到 52rem */}
       <Section padding="py-[var(--space-3xl)]">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,var(--container-wide))_1fr] gap-x-[var(--space-2xl)] gap-y-[var(--space-lg)] items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,max-content)_minmax(0,24rem)] gap-x-[var(--space-3xl)] gap-y-[var(--space-lg)] items-start">
           <div className="max-w-[min(52rem,100%)]">
-            <p className="font-[family-name:var(--font-display)] text-[length:var(--text-2xl)] leading-snug text-[var(--color-ink)]">
+            <p className="font-[family-name:var(--font-display)] text-[length:var(--text-2xl)] leading-snug text-[var(--color-ink)] [text-indent:-0.5em]">
               「{pullQuote.quote}」
             </p>
             <p className="mt-[var(--space-xs)] text-[length:var(--text-sm)] text-[var(--color-muted)]">
@@ -113,7 +121,7 @@ export default function Home() {
             {sideQuotes.map((t) => (
               <p
                 key={t.quote}
-                className="font-[family-name:var(--font-voice)] text-[length:var(--text-base)] text-[var(--color-accent)]"
+                className="text-[length:var(--text-base)] text-[var(--color-ink-2)]"
               >
                 {t.quote}
               </p>
@@ -125,7 +133,7 @@ export default function Home() {
       {/* 講題：雙聲道標題＋四行純文字列 */}
       <Section padding="py-[var(--space-2xl)]">
         <SectionTitle formal="四個講題" casual="挑你要的，深淺我來調" />
-        <div className="mt-[var(--space-lg)]">
+        <div className="mt-[var(--space-lg)] max-w-[var(--measure)]">
           {topics.map((topic, i) => (
             <div
               key={topic.no}
@@ -143,7 +151,7 @@ export default function Home() {
       {/* 邀請過的單位 */}
       <Section padding="py-[var(--space-2xl)]">
         <SectionTitle formal="他們請過我" casual="政府、學校、企業都有" />
-        <div className="mt-[var(--space-lg)] space-y-[var(--space-sm)]">
+        <div className="mt-[var(--space-lg)] max-w-[var(--measure)] space-y-[var(--space-sm)]">
           {clientColumns.map((col) => (
             <p
               key={col.label}
@@ -157,7 +165,7 @@ export default function Home() {
       </Section>
 
       {/* 一張照片 */}
-      <Section padding="py-[var(--space-2xl)] pb-[var(--space-3xl)]">
+      <Section padding="pt-[var(--space-2xl)] pb-0">
         <figure className="max-w-[min(52rem,100%)]">
           <Placeholder label="授課現場照片，待補" ratio="aspect-[16/7]" />
         </figure>

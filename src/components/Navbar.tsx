@@ -12,10 +12,10 @@ const navLinks = [
 export default function Navbar() {
   return (
     <header className="px-[var(--space-md)] sm:px-[var(--space-xl)]">
-      <div className="max-w-[var(--container)] mx-auto flex items-center justify-between gap-[var(--space-sm)] py-[var(--space-lg)]">
+      <div className="max-w-[var(--container)] mx-auto flex items-center justify-between gap-[var(--space-sm)] py-[var(--space-md)]">
         <Link
           href="/"
-          className="font-[family-name:var(--font-display)] font-semibold text-[0.95rem] sm:text-[length:var(--text-lg)] text-[var(--color-ink)] whitespace-nowrap"
+          className="font-[family-name:var(--font-display)] font-semibold text-[0.95rem] min-[375px]:text-[length:var(--text-base)] sm:text-[length:var(--text-lg)] text-[var(--color-ink)] whitespace-nowrap"
         >
           {profile.displayName}
         </Link>
@@ -24,7 +24,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[0.75rem] sm:text-[length:var(--text-sm)] text-[var(--color-ink-2)] hover:text-[var(--color-accent)] transition-colors duration-150 ease-out whitespace-nowrap"
+              className="text-[0.75rem] min-[375px]:text-[length:var(--text-sm)] py-[var(--space-xs)] text-[var(--color-ink-2)] hover:text-[var(--color-accent)] transition-colors duration-150 [transition-timing-function:var(--ease-out)] whitespace-nowrap"
             >
               {link.label}
             </Link>

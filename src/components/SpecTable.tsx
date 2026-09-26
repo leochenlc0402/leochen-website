@@ -8,7 +8,7 @@ export type SpecRow = { dt: ReactNode; dd: ReactNode };
 
 export default function SpecTable({ rows }: { rows: SpecRow[] }) {
   return (
-    <dl>
+    <dl className="max-w-[var(--container-wide)]">
       {rows.map((row, i) => (
         <div
           key={i}
@@ -16,9 +16,11 @@ export default function SpecTable({ rows }: { rows: SpecRow[] }) {
             i < rows.length - 1 ? "border-b text-[var(--color-rule)]" : ""
           }`}
         >
-          <dt className="shrink-0 sm:w-[11em] text-[length:var(--text-sm)] text-[var(--color-muted)]">
-            {row.dt}
-          </dt>
+          {row.dt ? (
+            <dt className="shrink-0 sm:w-[15em] text-[length:var(--text-sm)] text-[var(--color-muted)]">
+              {row.dt}
+            </dt>
+          ) : null}
           <dd className="text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
             {row.dd}
           </dd>

@@ -1,3 +1,4 @@
+/* Hallmark · genre: editorial · macrostructure: Index-First · design-system: design.md · designed-as-app · nav: N1a · footer: Ft6 · pre-emit critique: P4 H4 E4 S4 R4 V4 */
 import type { Metadata } from "next";
 import Section from "@/components/Section";
 import SectionTitle from "@/components/SectionTitle";
@@ -25,11 +26,14 @@ export default function MediaPage() {
 
       {/* 影音作品 */}
       <Section padding="py-[var(--space-xl)]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[var(--space-2xl)] gap-y-[var(--space-xl)]">
+        <div className="max-w-[var(--container-wide)] grid grid-cols-1 md:grid-cols-2 gap-x-[var(--space-2xl)] gap-y-[var(--space-xl)]">
           {videoWorks.map((video) => {
             const embedId = getYoutubeEmbedId(video.youtubeUrl);
             return (
               <div key={video.youtubeUrl}>
+                <h3 className="mb-[var(--space-sm)] font-[family-name:var(--font-display)] text-[length:var(--text-lg)] text-[var(--color-ink)]">
+                  {video.title}
+                </h3>
                 <div className="aspect-video bg-[var(--color-paper-2)]">
                   {embedId && (
                     <iframe
@@ -42,10 +46,7 @@ export default function MediaPage() {
                     />
                   )}
                 </div>
-                <h3 className="mt-[var(--space-sm)] font-[family-name:var(--font-display)] text-[length:var(--text-lg)] text-[var(--color-ink)]">
-                  {video.title}
-                </h3>
-                <p className="mt-[var(--space-xs)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+                <p className="mt-[var(--space-sm)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
                   {video.description}
                 </p>
                 {video.award && (
@@ -88,7 +89,7 @@ export default function MediaPage() {
       </Section>
 
       {/* Podcast */}
-      <Section padding="py-[var(--space-xl)] pb-[var(--space-3xl)]">
+      <Section padding="pt-[var(--space-xl)] pb-0">
         <SectionTitle formal="Podcast" casual="想聽我們兩個聊真心話，來這裡" />
         <div className="mt-[var(--space-lg)] max-w-[var(--measure)]">
           <p className="text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">

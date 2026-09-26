@@ -6,10 +6,10 @@ export default function Footer() {
   return (
     <footer className="px-[var(--space-md)] sm:px-[var(--space-xl)]">
       <div className="max-w-[var(--container)] mx-auto pt-[var(--space-4xl)] pb-[var(--space-2xl)]">
-        <p className="font-[family-name:var(--font-voice)] text-[length:var(--text-lg)] text-[var(--color-accent)]">
+        <p className="font-[family-name:var(--font-voice)] text-[length:var(--text-base)] sm:text-[length:var(--text-lg)] text-[var(--color-accent)]">
           有演講、講座或課程的邀請，寫信給我{" "}
-          <a href={`mailto:${profile.email}`} className="c3-link">
-            → {profile.email}
+          <a href={`mailto:${profile.email}`} className="c3-link whitespace-nowrap">
+            {profile.email} →
           </a>
         </p>
         <p className="mt-[var(--space-sm)] text-[length:var(--text-sm)] text-[var(--color-muted)]">

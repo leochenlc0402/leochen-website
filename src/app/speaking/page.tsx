@@ -1,3 +1,4 @@
+/* Hallmark · genre: editorial · macrostructure: Long Document · design-system: design.md · designed-as-app · nav: N1a · footer: Ft6 · pre-emit critique: P4 H4 E4 S4 R4 V4 */
 import type { Metadata } from "next";
 import Section from "@/components/Section";
 import SectionTitle from "@/components/SectionTitle";
@@ -47,7 +48,7 @@ export default function SpeakingPage() {
           <p className="mt-[var(--space-lg)] text-[length:var(--text-base)] text-[var(--color-ink)]">
             {inquiryNote}
           </p>
-          <ul className="mt-[var(--space-sm)] space-y-[var(--space-xs)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+          <ul className="mt-[var(--space-sm)] list-disc pl-[var(--space-lg)] marker:text-[var(--color-muted)] space-y-[var(--space-xs)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
             {inquiryFields.map((f) => (
               <li key={f}>{f}</li>
             ))}
@@ -59,8 +60,8 @@ export default function SpeakingPage() {
             {replyNote}
           </p>
           <p className="mt-[var(--space-lg)]">
-            <CTALink href={buildMailtoHref()} className="text-[length:var(--text-base)]">
-              寫信給我 → {profile.email}
+            <CTALink href={buildMailtoHref()} className="text-[length:var(--text-base)] whitespace-nowrap">
+              寫信給我 →
             </CTALink>
           </p>
         </div>
@@ -104,7 +105,7 @@ export default function SpeakingPage() {
       {/* 四個講題 */}
       <Section id="topics" padding="py-[var(--space-xl)]">
         <SectionTitle formal="四個講題" casual="挑你要的，深淺我來調" />
-        <div className="mt-[var(--space-2xl)] space-y-[var(--space-2xl)]">
+        <div className="mt-[var(--space-lg)] space-y-[var(--space-2xl)]">
           {topics.map((topic, i) => (
             <section key={topic.no} id={`topic-${i + 1}`}>
               <h3 className="font-[family-name:var(--font-display)] text-[length:var(--text-lg)] text-[var(--color-ink)]">
@@ -122,12 +123,12 @@ export default function SpeakingPage() {
       </Section>
 
       {/* 謝謝這些單位的邀請 */}
-      <Section padding="py-[var(--space-xl)] pb-[var(--space-3xl)]">
+      <Section padding="pt-[var(--space-xl)] pb-0">
         <SectionTitle
           formal="謝謝這些單位的邀請"
           casual="政府、學校、企業都有"
         />
-        <div className="mt-[var(--space-lg)] space-y-[var(--space-sm)]">
+        <div className="mt-[var(--space-lg)] max-w-[var(--measure)] space-y-[var(--space-sm)]">
           {clientColumns.map((col) => (
             <p
               key={col.label}

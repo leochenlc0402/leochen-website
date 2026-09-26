@@ -1,3 +1,4 @@
+/* Hallmark · genre: editorial · macrostructure: Letter · design-system: design.md · designed-as-app · nav: N1a · footer: Ft6 · pre-emit critique: P4 H4 E4 S4 R4 V4 */
 import type { Metadata } from "next";
 import Section from "@/components/Section";
 import SectionTitle from "@/components/SectionTitle";
@@ -73,8 +74,8 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* 公部門服務 */}
-      <Section padding="py-[var(--space-xl)]">
+      {/* 公部門服務（從這裡開始是「我替誰服務」，節奏拉開） */}
+      <Section padding="pt-[var(--space-3xl)] pb-[var(--space-xl)]">
         <SectionTitle formal="公部門服務" casual="政府請我去審別人的性平" />
         <div className="mt-[var(--space-lg)]">
           <SpecTable rows={publicService.map((item) => ({ dt: "", dd: item }))} />
@@ -102,41 +103,34 @@ export default function AboutPage() {
       </Section>
 
       {/* 出版與研究 */}
-      <Section padding="py-[var(--space-xl)] pb-[var(--space-3xl)]">
+      <Section padding="py-[var(--space-xl)]">
         <SectionTitle formal="出版與研究" casual="從書到論文，白紙黑字都在這" />
         <div className="mt-[var(--space-lg)] space-y-[var(--space-xl)]">
-          <div>
-            <p className="text-[length:var(--text-sm)] text-[var(--color-muted)] mb-[var(--space-xs)]">
-              性別專書出版
-            </p>
-            <SpecTable
-              rows={[
-                {
-                  dt: publishedBook.isbn,
-                  dd: `${publishedBook.authors}《${publishedBook.title}》`,
-                },
-              ]}
-            />
-          </div>
-          <div>
-            <p className="text-[length:var(--text-sm)] text-[var(--color-muted)] mb-[var(--space-xs)]">
-              政策諮詢與專案顧問
-            </p>
-            <SpecTable
-              rows={policyConsulting.map((item) => ({ dt: "", dd: item }))}
-            />
-          </div>
-          <div>
-            <p className="text-[length:var(--text-sm)] text-[var(--color-muted)] mb-[var(--space-xs)]">
-              論文與學術發表
-            </p>
-            <SpecTable rows={papers.map((item) => ({ dt: "", dd: item }))} />
-          </div>
+          <SpecTable
+            rows={[
+              {
+                dt: "性別專書出版",
+                dd: `${publishedBook.authors}《${publishedBook.title}》（ISBN ${publishedBook.isbn}）`,
+              },
+            ]}
+          />
+          <SpecTable
+            rows={policyConsulting.map((item, i) => ({
+              dt: i === 0 ? "政策諮詢與專案顧問" : "",
+              dd: item,
+            }))}
+          />
+          <SpecTable
+            rows={papers.map((item, i) => ({
+              dt: i === 0 ? "論文與學術發表" : "",
+              dd: item,
+            }))}
+          />
         </div>
       </Section>
 
       {/* 署名 */}
-      <Section padding="pb-[var(--space-3xl)]">
+      <Section padding="pb-0">
         <p className="font-[family-name:var(--font-voice)] text-[length:var(--text-base)] text-[var(--color-accent)]">
           {profile.displayName}
         </p>

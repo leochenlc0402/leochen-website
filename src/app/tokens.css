@@ -29,7 +29,7 @@
   --space-4xl: 9rem; /* 144px */
 
   /* 字級：五級 */
-  --text-display: clamp(2.6rem, 7.5vw, 6rem);
+  --text-display: clamp(2.25rem, 1.5rem + 4.9vw, 6rem);
   --text-2xl: 2.25rem;
   --text-lg: 1.375rem;
   --text-base: 1.0625rem;

@@ -10,8 +10,22 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 h1,
@@ -26,7 +40,7 @@ h4 {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
-  text-decoration-color: var(--color-ink-2);
+  text-decoration-color: currentColor;
   transition:
     color 150ms var(--ease-out),
     text-decoration-color 150ms var(--ease-out);
@@ -35,6 +49,10 @@ h4 {
 .c3-link:hover {
   color: var(--color-accent);
   text-decoration-color: var(--color-accent);
+}
+
+.c3-link:active {
+  color: var(--color-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
