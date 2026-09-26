@@ -7,6 +7,8 @@ import type { ReactNode } from "react";
 export type SpecRow = { dt: ReactNode; dd: ReactNode };
 
 export default function SpecTable({ rows }: { rows: SpecRow[] }) {
+  // 同一張表只要有任何一列有 dt，所有列都保留 dt 欄（空的當佔位），dd 才會對齊。
+  const hasDt = rows.some((r) => Boolean(r.dt));
   return (
     <dl className="max-w-[var(--container-wide)]">
       {rows.map((row, i) => (
@@ -16,7 +18,7 @@ export default function SpecTable({ rows }: { rows: SpecRow[] }) {
             i < rows.length - 1 ? "border-b text-[var(--color-rule)]" : ""
           }`}
         >
-          {row.dt ? (
+          {hasDt ? (
             <dt className="shrink-0 sm:w-[15em] text-[length:var(--text-sm)] text-[var(--color-muted)]">
               {row.dt}
             </dt>
