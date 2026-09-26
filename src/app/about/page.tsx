@@ -65,7 +65,7 @@ export default function AboutPage() {
       {/* 學歷 */}
       <Section
         formal="學歷"
-        casual="從口語傳播念到公關廣告，一路都在跟人講話"
+        casual="從公關廣告念到口語傳播，一路都在學怎麼跟人講話"
         eyebrow="Education"
         tone="dark"
       >
