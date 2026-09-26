@@ -1,10 +1,18 @@
 // 演講主題與內容。來源：leo-brief-2026-09-25.pdf 頁面二，逐字抄錄。
 // 每個講題附子題清單與兩張「簡報封面待補」占位（PDF 原文每欄下方各有兩格「這裡想放簡報封面」）。
+//
+// 2026-09-26 加四個欄位（brand-audit-2026-09-26.md §三）：適合對象／建議時長／形式 三項待里歐提供，
+// 先占位；對應法定時數依創晃查證的行政院性別平等會＋人事總處規定填入（見 brand-audit 第〇節）：
+// 一般公務員年度必修「性別主流化」課程，其中「同志暨多元性別」1 小時是明列子科目。
 
 export type Topic = {
   no: string;
   title: string;
   subtopics: string[];
+  suitableFor: string; // 適合對象（待補）
+  suggestedDuration: string; // 建議時長（待補）
+  format: string; // 形式（待補）
+  legalHours: string; // 對應法定時數
 };
 
 export const topics: Topic[] = [
@@ -22,6 +30,10 @@ export const topics: Topic[] = [
       "CEDAW 自製媒材",
       "CEDAW 短影音工作坊",
     ],
+    suitableFor: "（待里歐提供：＿＿）",
+    suggestedDuration: "（待里歐提供：＿＿）",
+    format: "（待里歐提供：＿＿）",
+    legalHours: "性別主流化 2 小時",
   },
   {
     no: "②",
@@ -33,6 +45,10 @@ export const topics: Topic[] = [
       "同志伴侶關係",
       "同志伴侶生命故事",
     ],
+    suitableFor: "（待里歐提供：＿＿）",
+    suggestedDuration: "（待里歐提供：＿＿）",
+    format: "（待里歐提供：＿＿）",
+    legalHours: "同志暨多元性別 1 小時",
   },
   {
     no: "③",
@@ -45,6 +61,10 @@ export const topics: Topic[] = [
       "性別與政治",
       "性別與民俗／宗教",
     ],
+    suitableFor: "（待里歐提供：＿＿）",
+    suggestedDuration: "（待里歐提供：＿＿）",
+    format: "（待里歐提供：＿＿）",
+    legalHours: "性別主流化",
   },
   {
     no: "④",
@@ -56,6 +76,10 @@ export const topics: Topic[] = [
       "議題倡議與社群傳播",
       "個人品牌與內容創作",
     ],
+    suitableFor: "（待里歐提供：＿＿）",
+    suggestedDuration: "（待里歐提供：＿＿）",
+    format: "（待里歐提供：＿＿）",
+    legalHours: "性別主流化",
   },
 ];
 

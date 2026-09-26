@@ -3,7 +3,7 @@ import Link from "next/link";
 import Section from "@/components/Section";
 import Placeholder from "@/components/Placeholder";
 import { topics, topicsIntro } from "@/data/topics";
-import { clientColumns } from "@/data/clients";
+import { clientColumns, featuredClients } from "@/data/clients";
 import { profile } from "@/data/profile";
 import {
   inquiryIntro,
@@ -86,7 +86,12 @@ export default function SpeakingPage() {
       </section>
 
       {/* 演講費用說明 */}
-      <Section title="演講費用說明" eyebrow="Fees" tone="dark">
+      <Section
+        formal="演講費用說明"
+        casual="費用怎麼算，一次講清楚"
+        eyebrow="Fees"
+        tone="dark"
+      >
         <p className="text-sm text-parchment/75 leading-relaxed mb-10 max-w-2xl">
           {feeIntro}
         </p>
@@ -98,7 +103,7 @@ export default function SpeakingPage() {
             <ul className="space-y-3 text-sm text-parchment/80 leading-relaxed">
               {publicSectorFees.map((item, i) => (
                 <li key={i} className="flex gap-2">
-                  <span className="text-clay">—</span>
+                  <span className="text-sand">—</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -117,7 +122,7 @@ export default function SpeakingPage() {
             <ul className="space-y-3 text-sm text-parchment/80 leading-relaxed">
               {transportFees.map((item, i) => (
                 <li key={i} className="flex gap-2">
-                  <span className="text-clay">—</span>
+                  <span className="text-sand">—</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -127,7 +132,12 @@ export default function SpeakingPage() {
       </Section>
 
       {/* 四大講題 */}
-      <Section title="演講主題與內容" eyebrow={topicsIntro}>
+      <Section
+        id="topics"
+        formal="演講主題與內容"
+        casual="挑你要的，我依需求調整深淺"
+        eyebrow={topicsIntro}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {topics.map((topic) => (
             <div key={topic.no} className="border border-sand p-5 sm:p-6 flex flex-col">
@@ -143,6 +153,24 @@ export default function SpeakingPage() {
                   </li>
                 ))}
               </ul>
+              <dl className="mt-5 space-y-1.5 text-xs text-coffee/60 dark:text-parchment/60 border-t border-sand pt-4">
+                <div className="flex gap-2">
+                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">適合對象</dt>
+                  <dd>{topic.suitableFor}</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">建議時長</dt>
+                  <dd>{topic.suggestedDuration}</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">形式</dt>
+                  <dd>{topic.format}</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">對應法定時數</dt>
+                  <dd className="text-accent">{topic.legalHours}</dd>
+                </div>
+              </dl>
               <div className="mt-5 grid grid-cols-2 gap-2">
                 <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
                 <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
@@ -152,28 +180,46 @@ export default function SpeakingPage() {
         </div>
       </Section>
 
-      {/* 感謝邀請單位 */}
+      {/* 合作單位 */}
       <Section
-        title="謝謝政府機關、學校單位與企業品牌的邀請"
+        formal="合作單位"
+        casual="這些地方都請過我"
         eyebrow="With Gratitude"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {clientColumns.map((col) => (
-            <div key={col.label}>
-              <h3 className="font-heading text-base font-semibold mb-4 pb-2 border-b border-clay/40">
-                {col.label}
-                <span className="ml-2 text-xs font-normal text-coffee/40 dark:text-parchment/40">
-                  {col.items.length}
-                </span>
-              </h3>
-              <ul className="space-y-2 text-sm text-coffee/70 dark:text-parchment/70 leading-relaxed">
-                {col.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          {featuredClients.map((name) => (
+            <div
+              key={name}
+              className="border border-sand p-4 flex items-center justify-center text-center text-sm font-medium text-coffee/80 dark:text-parchment/80 min-h-20"
+            >
+              {name}
             </div>
           ))}
         </div>
+
+        <details className="mt-10 group">
+          <summary className="cursor-pointer text-sm font-medium text-accent hover:text-accent-hover transition-colors list-none">
+            <span className="group-open:hidden">展開全部合作單位 ＋</span>
+            <span className="hidden group-open:inline">收合全部合作單位 −</span>
+          </summary>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {clientColumns.map((col) => (
+              <div key={col.label}>
+                <h3 className="font-heading text-base font-semibold mb-4 pb-2 border-b border-clay/40">
+                  {col.label}
+                  <span className="ml-2 text-xs font-normal text-coffee/40 dark:text-parchment/40">
+                    {col.items.length}
+                  </span>
+                </h3>
+                <ul className="space-y-2 text-sm text-coffee/70 dark:text-parchment/70 leading-relaxed">
+                  {col.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </details>
       </Section>
     </div>
   );

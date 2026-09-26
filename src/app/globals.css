@@ -1,19 +1,22 @@
 @import "tailwindcss";
 
 /*
-  色票：大地色系（暖沙／陶土／橄欖／深咖啡）＋一個高對比 accent（莓紅）。
-  依 rules/anti-ai-visual.md 的方向：避免「暖米底＋宋體大標＋單一暖色 accent」這個
-  AI 生成設計最常見的預設長相——所以底色不是最淺的那個值當主背景，
-  深咖啡與陶土／橄欖三色都有實際的版面工作（分區塊、分層級），不是純裝飾。
+  色票（2026-09-26 改版，創晃拍板 A 方案）：海軍藍 × 暖沙。
+  底 #F6F3EC／次底 #D9D2C3／主色（CTA、accent）#1F4E79／深字 #14263A。
+  依 rules/anti-ai-visual.md §1 的方向：暖米底＋宋體大標本身已撞第一種 AI 預設長相，
+  這裡把 accent 從赤陶橘換成高飽和海軍藍（不是同一族的暖色 accent），
+  並靠雙行標題系統（SectionTitle）當非通用識別裝置補足 §2 的但書。
+  clay 沿用「次要強調／標籤」的角色，改成同色系但明度不同的淺鋼藍，
+  在暖底與深底上的對比值刻意對齊舊版陶土色的水準（約 3.3–4.5:1，標籤級文字非本文）。
+  彩虹色不出現在主視覺；深色模式維持既有的背景／前景互換邏輯，不另外發明新變數。
 */
 :root {
-  --color-parchment: #f6efe0; /* 淺底，卡片與淺色版塊 */
-  --color-sand: #e8dabf; /* 暖沙，次要底色／邊框 */
-  --color-clay: #b5592e; /* 陶土，次要強調／標籤 */
-  --color-olive: #5b6a45; /* 橄欖，連結與次要文字 */
-  --color-coffee: #2a2018; /* 深咖啡，主要文字與深底 */
-  --color-accent: #a5283f; /* 莓紅，唯一高對比 accent：CTA、重點 */
-  --color-accent-hover: #841f31;
+  --color-parchment: #f6f3ec; /* 底，主背景與淺色版塊 */
+  --color-sand: #d9d2c3; /* 次底，次要底色／邊框 */
+  --color-clay: #3f7ba6; /* 次要強調／標籤，淺鋼藍 */
+  --color-coffee: #14263a; /* 深字，主要文字與深底 */
+  --color-accent: #1f4e79; /* 主色，唯一高對比 accent：CTA、重點 */
+  --color-accent-hover: #17395c;
 
   --background: var(--color-parchment);
   --foreground: var(--color-coffee);
@@ -23,7 +26,6 @@
   --color-parchment: var(--color-parchment);
   --color-sand: var(--color-sand);
   --color-clay: var(--color-clay);
-  --color-olive: var(--color-olive);
   --color-coffee: var(--color-coffee);
   --color-accent: var(--color-accent);
   --color-accent-hover: var(--color-accent-hover);

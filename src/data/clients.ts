@@ -113,3 +113,27 @@ export const clientColumns = [
   { label: "學校", items: schoolClients },
   { label: "NGO", items: ngoClients },
 ] as const;
+
+// 四大類單位總數，供首頁四格數據使用（企業11＋政府17＋學校37＋NGO18＝83）。
+// 算出來的，不手動寫死——單位名單增減時這個數字會自動跟著對。
+export const totalClientCount =
+  corporateClients.length +
+  governmentClients.length +
+  schoolClients.length +
+  ngoClients.length;
+
+// /speaking 合作單位牆前面放大的 10 個，2026-09-26 創晃指定名單。
+// 「PwC Taiwan 資誠」「國立成功大學」在 clients.ts 沒有一字不差的同名項目，
+// 依指示換成清單裡實際存在、最接近的名稱（見 outputs/leo-website 交接紀錄）。
+export const featuredClients: string[] = [
+  "Dell",
+  "Deloitte 勤業眾信",
+  "Uber",
+  "Unilever 聯合利華",
+  "PwC Taiwan 資誠聯合會計師事務所",
+  "教育部國民及學前教育署",
+  "國立臺灣大學",
+  "國立成功大學性別平等委員會",
+  "國立政治大學傳播學院",
+  "臺北市政府勞動局",
+];

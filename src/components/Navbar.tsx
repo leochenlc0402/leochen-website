@@ -7,8 +7,9 @@ import { profile } from "@/data/profile";
 
 const navLinks = [
   { label: "首頁", href: "/" },
+  { label: "關於", href: "/about" },
   { label: "演講邀約", href: "/speaking" },
-  { label: "媒體影音", href: "/media" },
+  { label: "作品與報導", href: "/media" },
 ];
 
 export default function Navbar() {

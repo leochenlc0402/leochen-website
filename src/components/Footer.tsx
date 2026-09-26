@@ -19,7 +19,7 @@ export default function Footer() {
             </p>
             <a
               href={`mailto:${profile.email}`}
-              className="block text-sm text-parchment/70 hover:text-accent transition-colors"
+              className="block text-sm text-parchment/70 hover:text-sand transition-colors"
             >
               {profile.email}
             </a>
@@ -33,7 +33,7 @@ export default function Footer() {
               href={podcast.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-sm text-parchment/70 hover:text-accent transition-colors"
+              className="block text-sm text-parchment/70 hover:text-sand transition-colors"
             >
               {podcast.name}
             </a>

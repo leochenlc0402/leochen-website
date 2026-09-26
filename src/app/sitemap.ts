@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const baseUrl = "https://leochen.example";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/speaking", "/media"];
+  const routes = ["", "/about", "/speaking", "/media"];
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

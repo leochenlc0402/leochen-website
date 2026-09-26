@@ -1,15 +1,18 @@
 import type { ReactNode } from "react";
+import SectionTitle from "@/components/SectionTitle";
 
 export default function Section({
   id,
   eyebrow,
-  title,
+  formal,
+  casual,
   children,
   tone = "light",
 }: {
   id?: string;
   eyebrow?: string;
-  title: string;
+  formal: string;
+  casual: string;
   children: ReactNode;
   tone?: "light" | "dark";
 }) {
@@ -24,17 +27,11 @@ export default function Section({
       <div className="max-w-6xl mx-auto">
         <div className="mb-10 sm:mb-12">
           {eyebrow && (
-            <p
-              className={`text-xs tracking-[0.25em] uppercase mb-3 ${
-                isDark ? "text-clay" : "text-clay"
-              }`}
-            >
+            <p className="text-xs tracking-[0.25em] uppercase mb-3 text-clay">
               {eyebrow}
             </p>
           )}
-          <h2 className="font-heading text-2xl sm:text-3xl font-semibold">
-            {title}
-          </h2>
+          <SectionTitle formal={formal} casual={casual} tone={tone} />
         </div>
         {children}
       </div>
