@@ -37,7 +37,16 @@ export default function Home() {
       <section className="px-[var(--space-md)] sm:px-[var(--space-xl)] pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)] min-h-[68vh] flex flex-col justify-between">
         <div className="max-w-[var(--container)] mx-auto w-full flex-1 flex flex-col justify-center">
           <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.1] tracking-[-0.01em] text-[length:var(--text-display)] text-[var(--color-ink)]">
-            <span className="block">{heroFormal}</span>
+            <span className="block">
+              {heroFormal
+                .split("，")
+                .filter(Boolean)
+                .map((seg) => (
+                  <span key={seg} className="inline-block whitespace-nowrap">
+                    {seg}，
+                  </span>
+                ))}
+            </span>
             <span className="block text-[var(--color-accent)]">
               {heroCasual}
             </span>
