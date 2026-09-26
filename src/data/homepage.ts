@@ -4,8 +4,9 @@
 // outputs/leo-website/brand-audit-2026-09-26.md §2.1（政府性平必修時數規定、
 // 講者選任調查）推出來的採購者處境，不是憑空編的話術。
 
-export const heroKicker = "陳荐宏 Leo Chen．性平講師 × 社群媒體創作者";
-export const heroHeadline = "性別平等，可以很重要，也可以很好玩。";
+// 雙聲道 H1：上行正式語（思源宋）／下行口語註（思源黑體）。名字已在 navbar，故不再需要 heroKicker。
+export const heroFormal = "性別平等，可以很重要，";
+export const heroCasual = "也可以很好玩。";
 export const heroSubhead = "把法定必修，講成大家想聽的那一堂。";
 
 // 「你可能正在找這樣的講師」：三條採購者的處境，同理不是指責。

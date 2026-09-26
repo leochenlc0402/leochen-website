@@ -3,7 +3,7 @@ import Link from "next/link";
 import Section from "@/components/Section";
 import Placeholder from "@/components/Placeholder";
 import { topics, topicsIntro } from "@/data/topics";
-import { clientColumns, featuredClients } from "@/data/clients";
+import { clientColumns } from "@/data/clients";
 import { profile } from "@/data/profile";
 import {
   inquiryIntro,
@@ -89,7 +89,6 @@ export default function SpeakingPage() {
       <Section
         formal="演講費用說明"
         casual="費用怎麼算，一次講清楚"
-        eyebrow="Fees"
         tone="dark"
       >
         <p className="text-sm text-parchment/75 leading-relaxed mb-10 max-w-2xl">
@@ -131,95 +130,80 @@ export default function SpeakingPage() {
         </div>
       </Section>
 
-      {/* 四大講題 */}
-      <Section
-        id="topics"
-        formal="演講主題與內容"
-        casual="挑你要的，我依需求調整深淺"
-        eyebrow={topicsIntro}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* 四大講題：拆框改 divide-y 列表，<details> 展開子題與欄位 */}
+      <Section id="topics" formal="演講主題與內容" casual="挑你要的，我依需求調整深淺">
+        <p className="text-sm text-coffee/60 dark:text-parchment/60 mb-8 max-w-2xl leading-relaxed">
+          {topicsIntro}
+        </p>
+        <div className="divide-y divide-sand">
           {topics.map((topic) => (
-            <div key={topic.no} className="border border-sand p-5 sm:p-6 flex flex-col">
-              <h3 className="font-heading text-base sm:text-lg font-semibold mb-4">
-                <span className="text-accent mr-1">{topic.no}</span>
-                {topic.title}
-              </h3>
-              <ul className="space-y-2 text-sm text-coffee/70 dark:text-parchment/70 flex-1">
-                {topic.subtopics.map((s) => (
-                  <li key={s} className="flex gap-2">
-                    <span className="text-clay">·</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
-              <dl className="mt-5 space-y-1.5 text-xs text-coffee/60 dark:text-parchment/60 border-t border-sand pt-4">
-                <div className="flex gap-2">
-                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">適合對象</dt>
-                  <dd>{topic.suitableFor}</dd>
+            <details key={topic.no} className="group py-5 sm:py-6">
+              <summary className="cursor-pointer list-none flex flex-wrap items-baseline justify-between gap-2">
+                <span className="font-heading text-lg sm:text-xl font-semibold">
+                  {topic.title}
+                </span>
+                <span className="flex items-center gap-3 text-sm text-coffee/50 dark:text-parchment/50">
+                  適合對象：{topic.suitableFor}
+                  <span className="text-accent transition-transform group-open:rotate-45">
+                    ＋
+                  </span>
+                </span>
+              </summary>
+              <div className="mt-5 grid grid-cols-1 md:grid-cols-[1fr_260px] gap-6">
+                <ul className="space-y-2 text-sm text-coffee/70 dark:text-parchment/70">
+                  {topic.subtopics.map((s) => (
+                    <li key={s} className="flex gap-2">
+                      <span className="text-clay">·</span>
+                      <span>{s}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div>
+                  <dl className="space-y-1.5 text-xs text-coffee/60 dark:text-parchment/60 border-t border-sand pt-4">
+                    <div className="flex gap-2">
+                      <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">
+                        建議時長
+                      </dt>
+                      <dd>{topic.suggestedDuration}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">
+                        形式
+                      </dt>
+                      <dd>{topic.format}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">
+                        對應法定時數
+                      </dt>
+                      <dd className="text-accent">{topic.legalHours}</dd>
+                    </div>
+                  </dl>
+                  <div className="mt-4 grid grid-cols-2 gap-2">
+                    <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
+                    <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">建議時長</dt>
-                  <dd>{topic.suggestedDuration}</dd>
-                </div>
-                <div className="flex gap-2">
-                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">形式</dt>
-                  <dd>{topic.format}</dd>
-                </div>
-                <div className="flex gap-2">
-                  <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">對應法定時數</dt>
-                  <dd className="text-accent">{topic.legalHours}</dd>
-                </div>
-              </dl>
-              <div className="mt-5 grid grid-cols-2 gap-2">
-                <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
-                <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
               </div>
-            </div>
+            </details>
           ))}
         </div>
       </Section>
 
-      {/* 合作單位 */}
-      <Section
-        formal="合作單位"
-        casual="這些地方都請過我"
-        eyebrow="With Gratitude"
-      >
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-          {featuredClients.map((name) => (
-            <div
-              key={name}
-              className="border border-sand p-4 flex items-center justify-center text-center text-sm font-medium text-coffee/80 dark:text-parchment/80 min-h-20"
-            >
-              {name}
-            </div>
+      {/* 合作單位：拆框，依買家類型分行全列，不折疊 */}
+      <Section formal="合作單位" casual="這些地方都請過我">
+        <div className="space-y-5">
+          {clientColumns.map((col) => (
+            <p key={col.label} className="text-sm sm:text-base leading-relaxed">
+              <span className="font-heading font-semibold text-accent mr-2">
+                {col.label}：
+              </span>
+              <span className="text-coffee/80 dark:text-parchment/80">
+                {col.items.join("・")}
+              </span>
+            </p>
           ))}
         </div>
-
-        <details className="mt-10 group">
-          <summary className="cursor-pointer text-sm font-medium text-accent hover:text-accent-hover transition-colors list-none">
-            <span className="group-open:hidden">展開全部合作單位 ＋</span>
-            <span className="hidden group-open:inline">收合全部合作單位 −</span>
-          </summary>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {clientColumns.map((col) => (
-              <div key={col.label}>
-                <h3 className="font-heading text-base font-semibold mb-4 pb-2 border-b border-clay/40">
-                  {col.label}
-                  <span className="ml-2 text-xs font-normal text-coffee/40 dark:text-parchment/40">
-                    {col.items.length}
-                  </span>
-                </h3>
-                <ul className="space-y-2 text-sm text-coffee/70 dark:text-parchment/70 leading-relaxed">
-                  {col.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </details>
       </Section>
     </div>
   );

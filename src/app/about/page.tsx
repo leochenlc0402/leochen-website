@@ -7,7 +7,6 @@ import {
   publicService,
   privateService,
   qualifications,
-  hostingNote,
   publishedBook,
   policyConsulting,
   papers,
@@ -16,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "關於里歐",
   description:
-    "陳荐宏 Leo Chen 的完整經歷：工作經歷、學歷、公部門與民間服務、專業資格、主持經歷、出版與研究。",
+    "陳荐宏 Leo Chen 的完整經歷：工作經歷、學歷、公部門與民間服務、專業資格、出版與研究。",
   openGraph: {
     title: `關於里歐｜${profile.displayName}`,
     description: "性平講師陳荐宏 Leo Chen 的完整經歷總覽。",
@@ -45,11 +44,7 @@ export default function AboutPage() {
       </section>
 
       {/* 工作經歷 */}
-      <Section
-        formal="工作經歷"
-        casual="這些是我實際待過、做過的地方"
-        eyebrow="Experience"
-      >
+      <Section formal="工作經歷" casual="這些是我實際待過、做過的地方">
         <ul className="space-y-4">
           {workExperience.map((item) => (
             <li key={item.org} className="border-l-2 border-clay pl-4 sm:pl-6">
@@ -62,29 +57,25 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      {/* 學歷 */}
+      {/* 學歷（2026-09-26 改淺底：/about 全站不再用深底段落） */}
       <Section
         formal="學歷"
         casual="從公關廣告念到口語傳播，一路都在學怎麼跟人講話"
-        eyebrow="Education"
-        tone="dark"
       >
         <ul className="space-y-4">
           {education.map((item) => (
-            <li key={item.school} className="border-l-2 border-sand pl-4 sm:pl-6">
+            <li key={item.school} className="border-l-2 border-clay pl-4 sm:pl-6">
               <p className="font-medium">{item.school}</p>
-              <p className="text-sm text-parchment/60">{item.degree}</p>
+              <p className="text-sm text-coffee/60 dark:text-parchment/60">
+                {item.degree}
+              </p>
             </li>
           ))}
         </ul>
       </Section>
 
       {/* 服務與參與 */}
-      <Section
-        formal="服務與參與"
-        casual="政府請我去審別人的性平"
-        eyebrow="Service"
-      >
+      <Section formal="服務與參與" casual="政府請我去審別人的性平">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <h3 className="font-heading text-lg font-semibold mb-4">
@@ -119,22 +110,11 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* 主持經歷 */}
-      <Section
-        formal="主持經歷"
-        casual="這塊還在整理，先別問我"
-        eyebrow="Hosting"
-        tone="dark"
-      >
-        <p className="text-parchment/60">（{hostingNote}）</p>
-      </Section>
+      {/* 主持經歷：資料目前為空（僅「陸續整理中」占位、無實際列項），整段不渲染。
+          未來若 experience.ts 補上真正的主持列表，改成依 length>0 判斷再顯示。 */}
 
       {/* 出版與研究 */}
-      <Section
-        formal="出版與研究"
-        casual="從書到論文，白紙黑字都在這"
-        eyebrow="Publications"
-      >
+      <Section formal="出版與研究" casual="從書到論文，白紙黑字都在這">
         <div className="space-y-12">
           <div>
             <h3 className="font-heading text-lg font-semibold mb-3">

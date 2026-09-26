@@ -16,15 +16,17 @@ export default function SectionTitle({
   return (
     <h2 className="leading-tight">
       <span
-        className={`block font-heading text-2xl sm:text-3xl font-semibold ${
+        className={`block font-heading font-semibold text-3xl sm:text-4xl ${
           isDark ? "text-parchment" : "text-coffee"
         }`}
       >
         {formal}
       </span>
       <span
-        className={`block font-body text-sm sm:text-base font-normal mt-1.5 ${
-          isDark ? "text-parchment/60" : "text-coffee/55"
+        className={`block mt-2 ml-6 sm:ml-12 border-l-4 pl-3 font-body font-bold text-xl sm:text-2xl ${
+          isDark
+            ? "border-parchment text-parchment"
+            : "border-accent text-accent"
         }`}
       >
         {casual}

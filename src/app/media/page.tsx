@@ -32,7 +32,6 @@ export default function MediaPage() {
       <Section
         formal="影音作品"
         casual="銀獎那支排第一，不是我自誇"
-        eyebrow="職場性騷擾"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {videoWorks.map((video) => {
@@ -74,7 +73,6 @@ export default function MediaPage() {
       <Section
         formal="媒體報導"
         casual="按時間排，新的在前面"
-        eyebrow="Press"
         tone="dark"
       >
         <div className="space-y-6">
@@ -107,7 +105,6 @@ export default function MediaPage() {
       <Section
         formal="Podcast"
         casual="想聽我們兩個聊真心話，來這裡"
-        eyebrow="心靈處方籤"
       >
         <div className="border border-sand p-6 sm:p-8 max-w-2xl">
           <h3 className="font-heading text-xl font-semibold mb-3">

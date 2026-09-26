@@ -8,7 +8,7 @@ import { profile } from "@/data/profile";
 const notoSansTC = Noto_Sans_TC({
   variable: "--font-noto-sans-tc",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "700", "900"],
 });
 
 const notoSerifTC = Noto_Serif_TC({
