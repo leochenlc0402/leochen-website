@@ -1,20 +1,28 @@
 import type { Metadata } from "next";
-import { Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
+import { LXGW_WenKai_TC, Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { profile } from "@/data/profile";
 
-const notoSansTC = Noto_Sans_TC({
-  variable: "--font-noto-sans-tc",
+// 三個字型直接掛成 design.md 鎖定的 token 名稱：--font-display / --font-body / --font-voice。
+// 字級與字重只用 design.md 指定的那一組，不多帶其他 weight。
+const notoSerifTC = Noto_Serif_TC({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["600"],
 });
 
-const notoSerifTC = Noto_Serif_TC({
-  variable: "--font-noto-serif-tc",
+const notoSansTC = Noto_Sans_TC({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "900"],
+  weight: ["400"],
+});
+
+const wenKaiTC = LXGW_WenKai_TC({
+  variable: "--font-voice",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -40,10 +48,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-TW" className={`${notoSansTC.variable} ${notoSerifTC.variable}`}>
-      <body className="min-h-screen flex flex-col bg-parchment text-coffee dark:bg-coffee dark:text-parchment">
+    <html
+      lang="zh-TW"
+      className={`${notoSerifTC.variable} ${notoSansTC.variable} ${wenKaiTC.variable}`}
+    >
+      <body className="min-h-screen flex flex-col bg-[var(--color-paper)] text-[var(--color-ink)]">
         <Navbar />
-        <main className="flex-1 pt-16 lg:pt-20">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

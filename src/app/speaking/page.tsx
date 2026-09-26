@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Section from "@/components/Section";
-import Placeholder from "@/components/Placeholder";
-import { topics, topicsIntro } from "@/data/topics";
+import SectionTitle from "@/components/SectionTitle";
+import SpecTable from "@/components/SpecTable";
+import CTALink from "@/components/CTALink";
+import { topics } from "@/data/topics";
 import { clientColumns } from "@/data/clients";
 import { profile } from "@/data/profile";
 import {
@@ -32,175 +33,108 @@ export const metadata: Metadata = {
 export default function SpeakingPage() {
   return (
     <div>
-      <section className="px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-16">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs tracking-[0.3em] uppercase text-clay mb-4">
-            Speaking Invitation
-          </p>
-          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            演講與分享邀約
-          </h1>
-          <p className="text-base sm:text-lg text-coffee/75 dark:text-parchment/75 max-w-2xl leading-relaxed">
+      {/* 標題與邀約說明 */}
+      <Section padding="pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)]">
+        <SectionTitle
+          as="h1"
+          formal="演講與分享邀約"
+          casual="來信就好，我會照活動安排回你"
+        />
+        <div className="mt-[var(--space-lg)] max-w-[var(--measure)]">
+          <p className="text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
             {inquiryIntro}
           </p>
-
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-10">
-            <div>
-              <h2 className="font-heading text-xl font-semibold mb-4">
-                {inquiryNote}
-              </h2>
-              <ul className="space-y-2 text-coffee/75 dark:text-parchment/75">
-                {inquiryFields.map((f) => (
-                  <li key={f} className="flex gap-2">
-                    <span className="text-accent">—</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 text-sm text-coffee/60 dark:text-parchment/60 leading-relaxed">
-                {emailChannelNote}
-              </p>
-              <p className="mt-3 text-sm text-coffee/60 dark:text-parchment/60 leading-relaxed">
-                {replyNote}
-              </p>
-            </div>
-
-            <div className="border border-sand p-6 sm:p-8 flex flex-col justify-between">
-              <div>
-                <h2 className="font-heading text-xl font-semibold mb-3">
-                  直接寄信邀約
-                </h2>
-                <p className="text-sm text-coffee/60 dark:text-parchment/60 mb-6">
-                  按下方按鈕會開啟信箱，主旨與內容欄位已預先帶入，直接補上單位與活動資訊即可送出。
-                </p>
-              </div>
-              <Link
-                href={buildMailtoHref()}
-                className="w-full text-center px-6 py-3 bg-accent hover:bg-accent-hover text-parchment text-sm font-medium tracking-wide transition-colors"
-              >
-                寄信邀約 {profile.email}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 演講費用說明 */}
-      <Section
-        formal="演講費用說明"
-        casual="費用怎麼算，一次講清楚"
-        tone="dark"
-      >
-        <p className="text-sm text-parchment/75 leading-relaxed mb-10 max-w-2xl">
-          {feeIntro}
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">
-              公務機關／學校
-            </h3>
-            <ul className="space-y-3 text-sm text-parchment/80 leading-relaxed">
-              {publicSectorFees.map((item, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-sand">—</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">
-              企業／民間機構
-            </h3>
-            <p className="text-sm text-parchment/80 leading-relaxed">
-              {corporateFeeNote}
-            </p>
-          </div>
-          <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">交通費</h3>
-            <ul className="space-y-3 text-sm text-parchment/80 leading-relaxed">
-              {transportFees.map((item, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-sand">—</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="mt-[var(--space-lg)] text-[length:var(--text-base)] text-[var(--color-ink)]">
+            {inquiryNote}
+          </p>
+          <ul className="mt-[var(--space-sm)] space-y-[var(--space-xs)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+            {inquiryFields.map((f) => (
+              <li key={f}>{f}</li>
+            ))}
+          </ul>
+          <p className="mt-[var(--space-lg)] text-[length:var(--text-sm)] text-[var(--color-muted)] leading-[1.7]">
+            {emailChannelNote}
+          </p>
+          <p className="mt-[var(--space-xs)] text-[length:var(--text-sm)] text-[var(--color-muted)] leading-[1.7]">
+            {replyNote}
+          </p>
+          <p className="mt-[var(--space-lg)]">
+            <CTALink href={buildMailtoHref()} className="text-[length:var(--text-base)]">
+              寫信給我 → {profile.email}
+            </CTALink>
+          </p>
         </div>
       </Section>
 
-      {/* 四大講題：拆框改 divide-y 列表，<details> 展開子題與欄位 */}
-      <Section id="topics" formal="演講主題與內容" casual="挑你要的，我依需求調整深淺">
-        <p className="text-sm text-coffee/60 dark:text-parchment/60 mb-8 max-w-2xl leading-relaxed">
-          {topicsIntro}
+      {/* 費用怎麼算 */}
+      <Section padding="py-[var(--space-xl)]">
+        <SectionTitle formal="費用怎麼算" casual="一次講清楚" />
+        <p className="mt-[var(--space-lg)] max-w-[var(--measure)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+          {feeIntro}
         </p>
-        <div className="divide-y divide-sand">
-          {topics.map((topic) => (
-            <details key={topic.no} className="group py-5 sm:py-6">
-              <summary className="cursor-pointer list-none flex flex-wrap items-baseline justify-between gap-2">
-                <span className="font-heading text-lg sm:text-xl font-semibold">
-                  {topic.title}
-                </span>
-                <span className="flex items-center gap-3 text-sm text-coffee/50 dark:text-parchment/50">
-                  適合對象：{topic.suitableFor}
-                  <span className="text-accent transition-transform group-open:rotate-45">
-                    ＋
-                  </span>
-                </span>
-              </summary>
-              <div className="mt-5 grid grid-cols-1 md:grid-cols-[1fr_260px] gap-6">
-                <ul className="space-y-2 text-sm text-coffee/70 dark:text-parchment/70">
-                  {topic.subtopics.map((s) => (
-                    <li key={s} className="flex gap-2">
-                      <span className="text-clay">·</span>
-                      <span>{s}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div>
-                  <dl className="space-y-1.5 text-xs text-coffee/60 dark:text-parchment/60 border-t border-sand pt-4">
-                    <div className="flex gap-2">
-                      <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">
-                        建議時長
-                      </dt>
-                      <dd>{topic.suggestedDuration}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">
-                        形式
-                      </dt>
-                      <dd>{topic.format}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="shrink-0 text-coffee/40 dark:text-parchment/40">
-                        對應法定時數
-                      </dt>
-                      <dd className="text-accent">{topic.legalHours}</dd>
-                    </div>
-                  </dl>
-                  <div className="mt-4 grid grid-cols-2 gap-2">
-                    <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
-                    <Placeholder label="簡報封面待補" ratio="aspect-[4/3]" />
+        <div className="mt-[var(--space-lg)]">
+          <SpecTable
+            rows={[
+              {
+                dt: "公務機關／學校",
+                dd: (
+                  <div className="space-y-[var(--space-xs)]">
+                    {publicSectorFees.map((item) => (
+                      <p key={item}>{item}</p>
+                    ))}
                   </div>
-                </div>
-              </div>
-            </details>
+                ),
+              },
+              { dt: "企業／民間機構", dd: corporateFeeNote },
+              {
+                dt: "交通費",
+                dd: (
+                  <div className="space-y-[var(--space-xs)]">
+                    {transportFees.map((item) => (
+                      <p key={item}>{item}</p>
+                    ))}
+                  </div>
+                ),
+              },
+            ]}
+          />
+        </div>
+      </Section>
+
+      {/* 四個講題 */}
+      <Section id="topics" padding="py-[var(--space-xl)]">
+        <SectionTitle formal="四個講題" casual="挑你要的，深淺我來調" />
+        <div className="mt-[var(--space-2xl)] space-y-[var(--space-2xl)]">
+          {topics.map((topic, i) => (
+            <section key={topic.no} id={`topic-${i + 1}`}>
+              <h3 className="font-[family-name:var(--font-display)] text-[length:var(--text-lg)] text-[var(--color-ink)]">
+                {topic.title}
+              </h3>
+              <p className="mt-[var(--space-xs)] text-[length:var(--text-sm)] text-[var(--color-muted)]">
+                適合對象／建議時長／形式：（待里歐提供）　對應時數：{topic.legalHours}
+              </p>
+              <p className="mt-[var(--space-sm)] max-w-[var(--measure)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+                {topic.subtopics.join("、")}
+              </p>
+            </section>
           ))}
         </div>
       </Section>
 
-      {/* 合作單位：拆框，依買家類型分行全列，不折疊 */}
-      <Section formal="合作單位" casual="這些地方都請過我">
-        <div className="space-y-5">
+      {/* 謝謝這些單位的邀請 */}
+      <Section padding="py-[var(--space-xl)] pb-[var(--space-3xl)]">
+        <SectionTitle
+          formal="謝謝這些單位的邀請"
+          casual="政府、學校、企業都有"
+        />
+        <div className="mt-[var(--space-lg)] space-y-[var(--space-sm)]">
           {clientColumns.map((col) => (
-            <p key={col.label} className="text-sm sm:text-base leading-relaxed">
-              <span className="font-heading font-semibold text-accent mr-2">
-                {col.label}：
-              </span>
-              <span className="text-coffee/80 dark:text-parchment/80">
-                {col.items.join("・")}
-              </span>
+            <p
+              key={col.label}
+              className="text-[length:var(--text-sm)] text-[var(--color-muted)] leading-[1.7]"
+            >
+              <span className="text-[var(--color-ink-2)]">{col.label}：</span>
+              {col.items.join("、")}
             </p>
           ))}
         </div>

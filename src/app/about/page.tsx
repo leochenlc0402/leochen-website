@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Section from "@/components/Section";
+import SectionTitle from "@/components/SectionTitle";
+import SpecTable from "@/components/SpecTable";
 import { profile } from "@/data/profile";
 import {
   workExperience,
@@ -26,126 +28,118 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div>
-      <section className="px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-8">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-xs tracking-[0.3em] uppercase text-clay mb-4">
-            About
+      {/* 開場：信件式，視覺上無標題。h1 只給螢幕閱讀器與 SEO，不加視覺樣式（sr-only）。 */}
+      <Section padding="pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)]">
+        <div className="max-w-[var(--measure)]">
+          <h1 className="sr-only">關於{profile.displayName}</h1>
+          <p className="font-[family-name:var(--font-voice)] text-[length:var(--text-lg)] text-[var(--color-accent)]">
+            你好，我是里歐。
           </p>
-          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            關於里歐
-          </h1>
-          <p className="text-base sm:text-lg text-coffee/75 dark:text-parchment/75 leading-relaxed">
-            （待里歐提供：為什麼做性平教育，300 字）
+          <p className="mt-[var(--space-md)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+            （待里歐提供：為什麼做性平教育，300 字，第一人稱）
           </p>
-          <p className="mt-6 text-sm text-coffee/50 dark:text-parchment/50">
-            至今累積 175+ 小時演講時數。
+          <p className="mt-[var(--space-lg)] text-[length:var(--text-sm)] text-[var(--color-muted)]">
+            目前累計 175 小時以上的演講時數。
           </p>
         </div>
-      </section>
+      </Section>
 
       {/* 工作經歷 */}
-      <Section formal="工作經歷" casual="這些是我實際待過、做過的地方">
-        <ul className="space-y-4">
-          {workExperience.map((item) => (
-            <li key={item.org} className="border-l-2 border-clay pl-4 sm:pl-6">
-              <p className="font-medium">{item.org}</p>
-              <p className="text-sm text-coffee/60 dark:text-parchment/60">
-                {item.role}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* 學歷（2026-09-26 改淺底：/about 全站不再用深底段落） */}
-      <Section
-        formal="學歷"
-        casual="從公關廣告念到口語傳播，一路都在學怎麼跟人講話"
-      >
-        <ul className="space-y-4">
-          {education.map((item) => (
-            <li key={item.school} className="border-l-2 border-clay pl-4 sm:pl-6">
-              <p className="font-medium">{item.school}</p>
-              <p className="text-sm text-coffee/60 dark:text-parchment/60">
-                {item.degree}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* 服務與參與 */}
-      <Section formal="服務與參與" casual="政府請我去審別人的性平">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">
-              公部門服務經歷
-            </h3>
-            <ul className="space-y-3 text-sm text-coffee/75 dark:text-parchment/75 leading-relaxed">
-              {publicService.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">
-              民間組織服務經歷
-            </h3>
-            <ul className="space-y-3 text-sm text-coffee/75 dark:text-parchment/75 leading-relaxed">
-              {privateService.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">
-              其他專業資格
-            </h3>
-            <ul className="space-y-3 text-sm text-coffee/75 dark:text-parchment/75 leading-relaxed">
-              {qualifications.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
+      <Section padding="py-[var(--space-xl)]">
+        <SectionTitle formal="工作經歷" casual="這些是我實際待過、做過的地方" />
+        <div className="mt-[var(--space-lg)]">
+          <SpecTable
+            rows={workExperience.map((item) => ({
+              dt: item.org,
+              dd: item.role,
+            }))}
+          />
         </div>
       </Section>
 
-      {/* 主持經歷：資料目前為空（僅「陸續整理中」占位、無實際列項），整段不渲染。
-          未來若 experience.ts 補上真正的主持列表，改成依 length>0 判斷再顯示。 */}
+      {/* 學歷 */}
+      <Section padding="py-[var(--space-xl)]">
+        <SectionTitle
+          formal="學歷"
+          casual="從公關廣告念到口語傳播，一路都在學怎麼跟人講話"
+        />
+        <div className="mt-[var(--space-lg)]">
+          <SpecTable
+            rows={education.map((item) => ({
+              dt: item.school,
+              dd: item.degree,
+            }))}
+          />
+        </div>
+      </Section>
+
+      {/* 公部門服務 */}
+      <Section padding="py-[var(--space-xl)]">
+        <SectionTitle formal="公部門服務" casual="政府請我去審別人的性平" />
+        <div className="mt-[var(--space-lg)]">
+          <SpecTable rows={publicService.map((item) => ({ dt: "", dd: item }))} />
+        </div>
+      </Section>
+
+      {/* 民間組織 */}
+      <Section padding="py-[var(--space-xl)]">
+        <SectionTitle formal="民間組織" casual="性平圈子裡也待過理事會" />
+        <div className="mt-[var(--space-lg)]">
+          <SpecTable
+            rows={privateService.map((item) => ({ dt: "", dd: item }))}
+          />
+        </div>
+      </Section>
+
+      {/* 專業資格 */}
+      <Section padding="py-[var(--space-xl)]">
+        <SectionTitle formal="專業資格" casual="縣市政府的性別人才資料庫都掛得到我" />
+        <div className="mt-[var(--space-lg)]">
+          <SpecTable
+            rows={qualifications.map((item) => ({ dt: "", dd: item }))}
+          />
+        </div>
+      </Section>
 
       {/* 出版與研究 */}
-      <Section formal="出版與研究" casual="從書到論文，白紙黑字都在這">
-        <div className="space-y-12">
+      <Section padding="py-[var(--space-xl)] pb-[var(--space-3xl)]">
+        <SectionTitle formal="出版與研究" casual="從書到論文，白紙黑字都在這" />
+        <div className="mt-[var(--space-lg)] space-y-[var(--space-xl)]">
           <div>
-            <h3 className="font-heading text-lg font-semibold mb-3">
+            <p className="text-[length:var(--text-sm)] text-[var(--color-muted)] mb-[var(--space-xs)]">
               性別專書出版
-            </h3>
-            <p className="text-sm text-coffee/80 dark:text-parchment/80 leading-relaxed">
-              {publishedBook.authors}《{publishedBook.title}》(ISBN:
-              {publishedBook.isbn})
             </p>
+            <SpecTable
+              rows={[
+                {
+                  dt: publishedBook.isbn,
+                  dd: `${publishedBook.authors}《${publishedBook.title}》`,
+                },
+              ]}
+            />
           </div>
           <div>
-            <h3 className="font-heading text-lg font-semibold mb-3">
+            <p className="text-[length:var(--text-sm)] text-[var(--color-muted)] mb-[var(--space-xs)]">
               政策諮詢與專案顧問
-            </h3>
-            <ul className="space-y-3 text-sm text-coffee/80 dark:text-parchment/80 leading-relaxed">
-              {policyConsulting.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
+            </p>
+            <SpecTable
+              rows={policyConsulting.map((item) => ({ dt: "", dd: item }))}
+            />
           </div>
           <div>
-            <h3 className="font-heading text-lg font-semibold mb-3">
+            <p className="text-[length:var(--text-sm)] text-[var(--color-muted)] mb-[var(--space-xs)]">
               論文與學術發表
-            </h3>
-            <ul className="space-y-3 text-sm text-coffee/80 dark:text-parchment/80 leading-relaxed">
-              {papers.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
+            </p>
+            <SpecTable rows={papers.map((item) => ({ dt: "", dd: item }))} />
           </div>
         </div>
+      </Section>
+
+      {/* 署名 */}
+      <Section padding="pb-[var(--space-3xl)]">
+        <p className="font-[family-name:var(--font-voice)] text-[length:var(--text-base)] text-[var(--color-accent)]">
+          {profile.displayName}
+        </p>
       </Section>
     </div>
   );

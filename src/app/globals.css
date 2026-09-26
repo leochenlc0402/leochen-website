@@ -1,115 +1,48 @@
 @import "tailwindcss";
-
-/*
-  色票（2026-09-26 改版，創晃拍板 A 方案）：海軍藍 × 暖沙。
-  底 #F6F3EC／次底 #D9D2C3／主色（CTA、accent）#1F4E79／深字 #14263A。
-  依 rules/anti-ai-visual.md §1 的方向：暖米底＋宋體大標本身已撞第一種 AI 預設長相，
-  這裡把 accent 從赤陶橘換成高飽和海軍藍（不是同一族的暖色 accent），
-  並靠雙行標題系統（SectionTitle）當非通用識別裝置補足 §2 的但書。
-  clay 沿用「次要強調／標籤」的角色，改成同色系但明度不同的淺鋼藍，
-  在暖底與深底上的對比值刻意對齊舊版陶土色的水準（約 3.3–4.5:1，標籤級文字非本文）。
-  彩虹色不出現在主視覺；深色模式維持既有的背景／前景互換邏輯，不另外發明新變數。
-*/
-:root {
-  --color-parchment: #f6f3ec; /* 底，主背景與淺色版塊 */
-  --color-sand: #d9d2c3; /* 次底，次要底色／邊框 */
-  --color-clay: #3f7ba6; /* 次要強調／標籤，淺鋼藍 */
-  --color-coffee: #14263a; /* 深字，主要文字與深底 */
-  --color-accent: #1f4e79; /* 主色，唯一高對比 accent：CTA、重點 */
-  --color-accent-hover: #17395c;
-
-  --background: var(--color-parchment);
-  --foreground: var(--color-coffee);
-}
-
-@theme inline {
-  --color-parchment: var(--color-parchment);
-  --color-sand: var(--color-sand);
-  --color-clay: var(--color-clay);
-  --color-coffee: var(--color-coffee);
-  --color-accent: var(--color-accent);
-  --color-accent-hover: var(--color-accent-hover);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-heading: var(--font-noto-serif-tc);
-  --font-body: var(--font-noto-sans-tc);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--color-coffee);
-    --foreground: var(--color-parchment);
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
+@import "./tokens.css";
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body), "Noto Sans TC", system-ui, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading), "Noto Serif TC", serif;
+  font-family: var(--font-display);
 }
 
-/* 跑馬燈：滿版跑，hover 暫停，系統關動態時退成靜態清單（在元件端用 CSS 類別切換） */
-@keyframes ticker {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+/* C3 排印連結：文字＋→＋1px 底線，hover 底線變 accent。全站唯一的 CTA 樣式。 */
+.c3-link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--color-ink-2);
+  transition:
+    color 150ms var(--ease-out),
+    text-decoration-color 150ms var(--ease-out);
 }
 
-.animate-ticker {
-  animation: ticker 32s linear infinite;
-}
-
-.ticker-track:hover .animate-ticker {
-  animation-play-state: paused;
+.c3-link:hover {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-ticker {
-    animation: none;
-    transform: none;
-  }
   html {
     scroll-behavior: auto;
   }
-}
 
-/* 進場動畫：一律 ease-out（先快後慢），對應 rules/motion-vocabulary.md §1 第 1 條 */
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-up {
-  animation: fade-up 0.5s ease-out both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up {
-    animation: none;
+  .c3-link {
+    transition: none;
   }
 }

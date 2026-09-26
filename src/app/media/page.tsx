@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Section from "@/components/Section";
+import SectionTitle from "@/components/SectionTitle";
+import CTALink from "@/components/CTALink";
 import { videoWorks, pressItems, podcast, getYoutubeEmbedId } from "@/data/media";
 import { profile } from "@/data/profile";
 
@@ -17,28 +19,18 @@ export const metadata: Metadata = {
 export default function MediaPage() {
   return (
     <div>
-      <section className="px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-8">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs tracking-[0.3em] uppercase text-clay mb-4">
-            Media
-          </p>
-          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-            作品與報導
-          </h1>
-        </div>
-      </section>
+      <Section padding="pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)]">
+        <SectionTitle as="h1" formal="作品與報導" casual="銀獎那支排第一" />
+      </Section>
 
       {/* 影音作品 */}
-      <Section
-        formal="影音作品"
-        casual="銀獎那支排第一，不是我自誇"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <Section padding="py-[var(--space-xl)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[var(--space-2xl)] gap-y-[var(--space-xl)]">
           {videoWorks.map((video) => {
             const embedId = getYoutubeEmbedId(video.youtubeUrl);
             return (
-              <div key={video.youtubeUrl} className="border border-sand">
-                <div className="aspect-video bg-coffee/5">
+              <div key={video.youtubeUrl}>
+                <div className="aspect-video bg-[var(--color-paper-2)]">
                   {embedId && (
                     <iframe
                       className="w-full h-full"
@@ -50,19 +42,17 @@ export default function MediaPage() {
                     />
                   )}
                 </div>
-                <div className="p-5">
-                  {video.award && (
-                    <p className="text-xs font-medium text-accent mb-2">
-                      ☆ {video.award} ☆
-                    </p>
-                  )}
-                  <h3 className="font-heading text-base font-semibold mb-2">
-                    {video.title}
-                  </h3>
-                  <p className="text-sm text-coffee/70 dark:text-parchment/70 leading-relaxed">
-                    {video.description}
+                <h3 className="mt-[var(--space-sm)] font-[family-name:var(--font-display)] text-[length:var(--text-lg)] text-[var(--color-ink)]">
+                  {video.title}
+                </h3>
+                <p className="mt-[var(--space-xs)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+                  {video.description}
+                </p>
+                {video.award && (
+                  <p className="mt-[var(--space-xs)] text-[length:var(--text-sm)] text-[var(--color-muted)]">
+                    {video.award.replace(/^本片榮獲/, "")}
                   </p>
-                </div>
+                )}
               </div>
             );
           })}
@@ -70,57 +60,45 @@ export default function MediaPage() {
       </Section>
 
       {/* 媒體報導 */}
-      <Section
-        formal="媒體報導"
-        casual="按時間排，新的在前面"
-        tone="dark"
-      >
-        <div className="space-y-6">
+      <Section padding="py-[var(--space-xl)]">
+        <SectionTitle formal="媒體報導" casual="按時間排，新的在前面" />
+        <ol className="mt-[var(--space-lg)] space-y-[var(--space-lg)]">
           {pressItems.map((item) => (
-            <a
-              key={item.url}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block border-b border-parchment/10 pb-6 group"
-            >
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
-                <span className="text-sm font-medium text-sand">
+            <li key={item.url}>
+              <div className="flex flex-wrap items-baseline gap-x-[var(--space-sm)] gap-y-[var(--space-xs)]">
+                <span className="text-[length:var(--text-sm)] text-[var(--color-muted)]">
                   {item.outlet}
                 </span>
-                <span className="text-xs text-parchment/40">{item.date}</span>
+                <span className="text-[length:var(--text-sm)] [font-variant-numeric:tabular-nums] text-[var(--color-muted)]">
+                  {item.date}
+                </span>
               </div>
-              <h3 className="font-heading text-lg font-semibold mb-2 group-hover:text-sand transition-colors">
+              <CTALink
+                href={item.url}
+                className="mt-[var(--space-xs)] block font-[family-name:var(--font-display)] text-[length:var(--text-lg)]"
+              >
                 {item.title}
-              </h3>
-              <p className="text-sm text-parchment/70 leading-relaxed">
+              </CTALink>
+              <p className="mt-[var(--space-xs)] max-w-[var(--measure)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
                 {item.summary}
               </p>
-            </a>
+            </li>
           ))}
-        </div>
+        </ol>
       </Section>
 
       {/* Podcast */}
-      <Section
-        formal="Podcast"
-        casual="想聽我們兩個聊真心話，來這裡"
-      >
-        <div className="border border-sand p-6 sm:p-8 max-w-2xl">
-          <h3 className="font-heading text-xl font-semibold mb-3">
-            {podcast.name}
-          </h3>
-          <p className="text-sm text-coffee/70 dark:text-parchment/70 leading-relaxed mb-6">
+      <Section padding="py-[var(--space-xl)] pb-[var(--space-3xl)]">
+        <SectionTitle formal="Podcast" casual="想聽我們兩個聊真心話，來這裡" />
+        <div className="mt-[var(--space-lg)] max-w-[var(--measure)]">
+          <p className="text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
             {podcast.description}
           </p>
-          <a
-            href={podcast.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 bg-accent hover:bg-accent-hover text-parchment text-sm font-medium tracking-wide transition-colors"
-          >
-            收聽 Podcast
-          </a>
+          <p className="mt-[var(--space-md)]">
+            <CTALink href={podcast.url} className="text-[length:var(--text-base)]">
+              收聽 {podcast.name} →
+            </CTALink>
+          </p>
         </div>
       </Section>
     </div>
