@@ -1,31 +1,19 @@
 import type { ReactNode } from "react";
 
-// F3 規格表：每列 dt（年份或單位）＋ dd（職稱或內容），列之間 1px --color-rule hairline。
-// 這是本站唯一允許畫線的地方，只用 Tailwind 的 border-b 一種寫法：
-// 該列自己的文字顏色設成 --color-rule，讓 border-b 的預設 currentColor 直接撿到這個值，
-// 不再疊加任何其他顏色工具類別去指定它。
-export type SpecRow = { dt: ReactNode; dd: ReactNode };
+// hairline 規格列：每列 dt（標題／年份）＋ dd（內容），列之間 1px --color-rule 分隔線
+// （對應首頁「可以怎麼請他」那種列表視覺，見 globals.css .spec-row）。
+// 同一張表只要有任一列帶 dt，全表都保留 dt 欄（沒有的列留空白佔位，讓 dd 對齊）；
+// 整張表都沒有 dt 時（履歷裡的公部門服務／民間組織／專業資格純條列），改用單欄滿版。
+export type SpecRow = { dt?: ReactNode; dd: ReactNode };
 
 export default function SpecTable({ rows }: { rows: SpecRow[] }) {
-  // 同一張表只要有任何一列有 dt，所有列都保留 dt 欄（空的當佔位），dd 才會對齊。
   const hasDt = rows.some((r) => Boolean(r.dt));
   return (
-    <dl className="max-w-[var(--container-wide)]">
+    <dl>
       {rows.map((row, i) => (
-        <div
-          key={i}
-          className={`flex flex-col sm:flex-row sm:items-baseline gap-x-[var(--space-lg)] gap-y-[var(--space-xs)] py-[var(--space-sm)] ${
-            i < rows.length - 1 ? "border-b text-[var(--color-rule)]" : ""
-          }`}
-        >
-          {hasDt ? (
-            <dt className="shrink-0 sm:w-[15em] text-[length:var(--text-sm)] text-[var(--color-muted)]">
-              {row.dt}
-            </dt>
-          ) : null}
-          <dd className="text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
-            {row.dd}
-          </dd>
+        <div className={`spec-row${hasDt ? "" : " flat"}`} key={i}>
+          {hasDt ? <dt>{row.dt}</dt> : null}
+          <dd>{row.dd}</dd>
         </div>
       ))}
     </dl>

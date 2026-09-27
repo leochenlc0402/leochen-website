@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-// C3 排印連結：文字＋→＋1px 底線，hover 底線變 accent。全站唯一的 CTA 樣式，沒有實心按鈕。
-// 箭頭「→」放在 children 文字裡（呼叫端自己接在文字後面），這裡只負責底線與 hover 變色。
+// 通用連結：純粹依 href 決定用 <a>（外部／mailto／錨點）還是 next/link Link，
+// 樣式完全交給呼叫端傳入 className（.btn／.link／.link-ink，見 globals.css）。
 export default function CTALink({
   href,
   children,
@@ -12,7 +12,6 @@ export default function CTALink({
   children: ReactNode;
   className?: string;
 }) {
-  const cls = `c3-link text-[var(--color-ink-2)] ${className}`;
   const isExternal = href.startsWith("http") || href.startsWith("mailto:");
 
   if (isExternal) {
@@ -21,7 +20,7 @@ export default function CTALink({
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-        className={cls}
+        className={className}
       >
         {children}
       </a>
@@ -29,7 +28,7 @@ export default function CTALink({
   }
 
   return (
-    <Link href={href} className={cls}>
+    <Link href={href} className={className}>
       {children}
     </Link>
   );

@@ -1,44 +1,32 @@
-/* Hallmark · genre: editorial · macrostructure: Marquee Hero · design-system: design.md · designed-as-app · nav: N1a · footer: Ft6 · theme: custom (paper oklch(97.5% 0.006 250) · accent oklch(52% 0.12 60) · Noto Serif TC + Noto Sans TC + LXGW WenKai TC) */
-
 /*
   設計系統真本：/Users/zhangchuanghuang/leo-website/design.md
   這裡只鎖定 token 數值，不加派生規則。要調整先改 design.md，再回頭同步這裡。
-  全站只有一個淺色版本，不做深色模式。
+  色票為里歐指定（見 design.md〈色票〉），全站只有一個淺色版本，不做深色模式。
 */
 
 :root {
-  /* 色票（OKLCH，錨定海軍藍冷白，暖赭是唯一 accent，全站累計面積 ≤ 3%） */
-  --color-paper: oklch(97.5% 0.006 250);
-  --color-paper-2: oklch(94.5% 0.008 250);
-  --color-rule: oklch(85% 0.010 250);
-  --color-muted: oklch(48% 0.030 255);
-  --color-ink-2: oklch(34% 0.045 255);
-  --color-ink: oklch(24% 0.055 255);
-  --color-accent: oklch(52% 0.120 60);
-  --color-accent-ink: oklch(97.5% 0.006 250);
-  --color-focus: oklch(52% 0.120 60);
+  /* 色票 */
+  --color-paper: #f6f1e8;
+  --color-paper-2: #efe8db;
+  --color-teal: #2d7188;
+  --color-navy: #17364d;
+  --color-coral: #e56b45;
+  --color-gold: #c8a45d;
+  --color-ink-2: #3d5566;
+  --color-muted: #6b7c86;
+  --color-rule: #e2d9c8;
+  --color-cream-dim: rgba(246, 241, 232, 0.78);
+  --color-gold-dim: rgba(200, 164, 93, 0.5);
+  --color-focus: var(--color-coral);
 
-  /* 間距：4pt 命名尺 */
-  --space-xs: 0.5rem; /* 8px */
-  --space-sm: 0.75rem; /* 12px */
-  --space-md: 1rem; /* 16px */
-  --space-lg: 1.5rem; /* 24px */
-  --space-xl: 2.5rem; /* 40px */
-  --space-2xl: 4rem; /* 64px */
-  --space-3xl: 6rem; /* 96px */
-  --space-4xl: 9rem; /* 144px */
-
-  /* 字級：五級 */
-  --text-display: clamp(2.25rem, 1.5rem + 4.9vw, 6rem);
-  --text-2xl: 2.25rem;
-  --text-lg: 1.375rem;
-  --text-base: 1.0625rem;
-  --text-sm: 0.875rem;
-
-  /* 版面尺標 */
-  --measure: 34em; /* 內文欄 */
-  --container: 68rem; /* 頁容器 */
-  --container-wide: 52rem; /* 出格元素上限 */
+  /* 區塊垂直節奏：桌機 112px，手機 72px（見下方媒體查詢） */
+  --sec: 112px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 760px) {
+  :root {
+    --sec: 72px;
+  }
 }

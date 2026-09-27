@@ -1,14 +1,12 @@
 // 謝謝政府機關、學校單位與企業品牌的邀請。
 // 來源：leo-brief-2026-09-25.pdf 頁面二末段（四欄：企業／政府／學校／NGO），
 // 以 pdftotext -layout 與逐欄核對兩種方式交叉確認後逐字抄錄。
-// 沒有 logo 素材，一律用文字牆呈現。
+// 縣市政府 logo 素材已到位（public/images/logo-*.png），企業／學校／NGO 仍用文字牆呈現。
 //
-// 不確定事項（PDF 表格跨頁換行，無法從純文字排版 100% 判斷斷行處是否為同一個名稱）：
-// 1.「Jardine」與「Restaurant Group」在原文連續兩行、無標點分隔，這裡當成同一家公司
-//    「Jardine Restaurant Group」（確有同名連鎖餐飲集團）處理，但不排除是兩個獨立品牌。
-// 2.「Disabled+Queer」與「桃緣彩虹居所」同樣連續兩行、無標點分隔，這裡當成同一個單位處理，
-//    但也可能是兩個獨立單位（分見 ngoClients）。
-// 兩項已列入完成回報的「不確定事項」，請里歐確認後再調整。
+// 2026-09-27 依 leo-answers-2026-09-27.md〈合作單位名稱更正〉修正：
+// 1.「Jardine Restaurant Group」維持一家（里歐確認）。
+// 2.「殘酷兒 Disabled+Queer」與「桃緣彩虹居所」是兩家，不是一家（原本誤併）。
+// 3.「國立中央大學性別小彩坊」是一個單位，不是兩個（原本誤拆成「國立中央大學性別」＋「小彩坊」）。
 
 export const corporateClients: string[] = [
   "Dell",
@@ -54,8 +52,7 @@ export const schoolClients: string[] = [
   "國立政治大學傳播學院",
   "國立成功大學性別平等委員會",
   "國立成功大學 TO 拉酷社",
-  "國立中央大學性別",
-  "小彩坊",
+  "國立中央大學性別小彩坊",
   "國立暨南國際大學",
   "國立臺北護理健康大學學生輔導中心",
   "國立臺北醫學大學酷Cheer社",
@@ -88,8 +85,8 @@ export const schoolClients: string[] = [
 
 export const ngoClients: string[] = [
   "社團法人台灣基地協會",
-  "殘酷兒",
-  "Disabled+Queer 桃緣彩虹居所",
+  "殘酷兒 Disabled+Queer",
+  "桃緣彩虹居所",
   "GisneyLand 風城部屋",
   "GisneyLand 諸羅部屋",
   "蘆洲少年福利服務中心",
@@ -114,7 +111,7 @@ export const clientColumns = [
   { label: "NGO", items: ngoClients },
 ] as const;
 
-// 四大類單位總數，供首頁四格數據使用（企業11＋政府17＋學校37＋NGO18＝83）。
+// 四大類單位總數（企業11＋政府17＋學校36＋NGO18＝82）。
 // 算出來的，不手動寫死——單位名單增減時這個數字會自動跟著對。
 export const totalClientCount =
   corporateClients.length +
@@ -122,18 +119,32 @@ export const totalClientCount =
   schoolClients.length +
   ngoClients.length;
 
-// /speaking 合作單位牆前面放大的 10 個，2026-09-26 創晃指定名單。
-// 「PwC Taiwan 資誠」「國立成功大學」在 clients.ts 沒有一字不差的同名項目，
-// 依指示換成清單裡實際存在、最接近的名稱（見 outputs/leo-website 交接紀錄）。
-export const featuredClients: string[] = [
-  "Dell",
-  "Deloitte 勤業眾信",
-  "Uber",
-  "Unilever 聯合利華",
-  "PwC Taiwan 資誠聯合會計師事務所",
-  "教育部國民及學前教育署",
-  "國立臺灣大學",
-  "國立成功大學性別平等委員會",
-  "國立政治大學傳播學院",
-  "臺北市政府勞動局",
+// 首頁／關於頁「還有 ⋯⋯ 等 80 多個單位」摘要句，逐字照定稿靜態稿 final-home.html。
+export const clientsSummaryLine =
+  "還有 Dell、Deloitte 勤業眾信、Uber、聯合利華、臺大、政大、成大等 80 多個單位。";
+
+// 首頁「回頭再邀」縣市政府 logo 牆，順序照定稿靜態稿 final-home.html。
+// 圖檔：public/images/logo-<slug>.png（原始檔在 photos-raw/logos，中文檔名已改英文）。
+export const cityLogos: { slug: string; name: string }[] = [
+  { slug: "taipei", name: "臺北市政府" },
+  { slug: "hsinchu-city", name: "新竹市政府" },
+  { slug: "yilan", name: "宜蘭縣政府" },
+  { slug: "changhua", name: "彰化縣政府" },
+  { slug: "yunlin", name: "雲林縣政府" },
+  { slug: "chiayi", name: "嘉義縣政府" },
+  { slug: "tainan", name: "臺南市政府" },
+  { slug: "kaohsiung", name: "高雄市政府" },
 ];
+
+// 回頭再邀鏈：承辦聽完覺得讚，回去用自己單位的名義再邀一場。
+// 來源：leo-answers-2026-09-27.md〈回頭再邀〉，逐字；共用中間節點的鏈合併成一條
+// （雲林社會處→雲林環保局→宜蘭環保局），照定稿靜態稿 final-home.html 呈現。
+export const referralChains: string[][] = [
+  ["雲林縣政府社會處", "雲林縣政府環保局", "宜蘭縣政府環保局"],
+  ["新竹市政府社會處", "新竹市政府人事處"],
+  ["高雄市政府社會處", "嘉義縣政府社會處"],
+];
+
+export const referralCount = { number: "10", suffix: "+" };
+export const referralLeadLines = ["個單位聽完之後，", "又請了第二場。"];
+export const referralNote = "承辦聽完覺得讚，回去用自己單位的名義再邀一場";

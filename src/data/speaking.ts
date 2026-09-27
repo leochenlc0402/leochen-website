@@ -41,6 +41,96 @@ export const transportFees: string[] = [
   "若活動地點鄰近車站至活動場地仍有交通需求，煩請主辦單位協助安排接駁，或另行負擔計程車等交通費用。",
 ];
 
+// 合作形式（逐字）。來源：leo-answers-2026-09-27.md〈合作形式〉。
+// homeLine／homeDuration 是首頁「可以怎麼請他」卡片的精簡版文字，逐字照定稿靜態稿
+// final-home.html（里歐已確認 OK）；fields 是 /speaking 頁要求的完整逐字欄位。
+export type Format = {
+  title: string;
+  homeLine: string;
+  homeDuration: string;
+  fields: { label: string; value: string }[];
+};
+
+export const formats: Format[] = [
+  {
+    title: "講座／演講",
+    homeLine: "公務機關、企業、學校教職員、一般大眾。建議安排 2 小時。",
+    homeDuration: "1–3 小時",
+    fields: [
+      { label: "講題名稱", value: "詳見「演講主題與內容列表」" },
+      { label: "適合對象", value: "公務機關、企業、學校教職員、一般大眾" },
+      {
+        label: "建議時長",
+        value: "1–3 小時（最少安排 1 小時，建議以 2 小時為適當時長）",
+      },
+    ],
+  },
+  {
+    title: "工作坊／實務操作",
+    homeLine: "CEDAW 短影音拍攝、自製媒材教學。半天概念與實務，半天動手做。",
+    homeDuration: "6–8 小時",
+    fields: [
+      { label: "講題名稱", value: "CEDAW 短影音拍攝、自製媒材教學等" },
+      { label: "適合對象", value: "公務機關、企業、學校教職員、一般大眾" },
+      {
+        label: "建議時長",
+        value: "6–8 小時（可安排半天概念與實務教學、半天實作操作）",
+      },
+    ],
+  },
+  {
+    title: "電影賞析暨映後專家分享",
+    homeLine: "依主辦單位需求選片，映後搭配性平與 CEDAW 議題分享至少 30 分鐘。",
+    homeDuration: "1.5–3 小時",
+    fields: [
+      {
+        label: "講題名稱",
+        value: "依主辦單位需求選片，搭配性別平等及 CEDAW 議題進行專業分享",
+      },
+      { label: "適合對象", value: "公務機關、企業、學校教職員、一般大眾" },
+      {
+        label: "建議時長",
+        value: "1.5–3 小時（包含影片放映及映後專家分享，映後分享至少 30 分鐘）",
+      },
+    ],
+  },
+  {
+    title: "論壇／座談／主持",
+    homeLine: "性別議題論壇、座談、專題對談、映後座談。",
+    homeDuration: "1–3 小時",
+    fields: [
+      {
+        label: "參與形式",
+        value: "性別議題論壇、座談、專題對談、映後座談等",
+      },
+      { label: "適合對象", value: "公務機關、企業、學校、NGO、一般大眾" },
+      { label: "建議時長", value: "1–3 小時" },
+      {
+        label: "曾經合作",
+        value: "新竹市公車無障礙服務及性平友善度調查專家學者座談會",
+      },
+    ],
+  },
+  {
+    title: "顧問／議題諮詢",
+    homeLine: "性平議題諮詢、活動內容規劃、教材與宣導媒材建議。",
+    homeDuration: "依專案評估",
+    fields: [
+      {
+        label: "服務內容",
+        value: "性別平等議題諮詢、活動內容規劃、教材與宣導媒材建議等",
+      },
+      { label: "適合對象", value: "公務機關、企業、學校、NGO" },
+      { label: "合作形式", value: "單次諮詢／專案合作／顧問服務" },
+      { label: "建議時長", value: "依專案需求評估" },
+      {
+        label: "曾經合作",
+        value: "雲林縣政府性別平等業務輔導考核－性別平等故事方案工作坊顧問",
+      },
+    ],
+  },
+];
+
 export const email = "leochenlc0402@gmail.com";
 
 export function buildMailtoHref() {

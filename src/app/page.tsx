@@ -1,24 +1,29 @@
-/* Hallmark · genre: editorial · macrostructure: Marquee Hero · design-system: design.md · designed-as-app · nav: N1a · footer: Ft6 · pre-emit critique: P4 H4 E4 S4 R4 V4 */
 import type { Metadata } from "next";
-import Placeholder from "@/components/Placeholder";
-import CTALink from "@/components/CTALink";
-import SectionTitle from "@/components/SectionTitle";
+import Image from "next/image";
+import { Fragment } from "react";
 import Section from "@/components/Section";
+import Heading from "@/components/Heading";
+import CTALink from "@/components/CTALink";
 import { profile } from "@/data/profile";
 import { stats } from "@/data/stats";
 import { topics } from "@/data/topics";
-import { clientColumns } from "@/data/clients";
+import { formats } from "@/data/speaking";
+import { testimonials } from "@/data/testimonials";
+import { identityRows, credo } from "@/data/identity";
 import {
-  heroFormal,
-  heroCasual,
-  heroSubhead,
-  featuredTestimonials,
-} from "@/data/homepage";
+  clientsSummaryLine,
+  cityLogos,
+  referralChains,
+  referralCount,
+  referralLeadLines,
+  referralNote,
+} from "@/data/clients";
+import { heroFormal, heroCasual, heroSubhead } from "@/data/homepage";
 
 export const metadata: Metadata = {
   title: `${profile.displayName} — ${profile.title}`,
   description:
-    "陳荐宏 Leo Chen：性平講師 × 社群媒體創作者。政府性平委員、夫夫之道共同創作者、公開同志伴侶——三個身份一起作證的性平講師。",
+    "陳荐宏 Leo Chen：性平講師 × 社群媒體創作者。政府性平委員、夫夫之道共同創辦人、公開同志伴侶——三個身份一起作證的性平講師。",
   openGraph: {
     title: `${profile.displayName} — ${profile.title}`,
     description:
@@ -27,148 +32,240 @@ export const metadata: Metadata = {
   },
 };
 
-// 首頁四格數據第四格（重複邀約單位）數字待里歐提供，先不顯示。
-const visibleStats = stats.filter((_, i) => i !== 3);
-const [pullQuote, ...sideQuotes] = featuredTestimonials;
+const stripImages = [
+  "/images/audience.jpg",
+  "/images/sign.jpg",
+  "/images/pink-screen.jpg",
+  "/images/workshop.jpg",
+  "/images/rainbow-mic.jpg",
+  "/images/overalls.jpg",
+];
+
+// 兩排跑馬燈的內容，取自 src/data/testimonials.ts（未新增任何一句），
+// 分組與定稿靜態稿 final-home.html 一致；每排把內容自我複製一次，
+// 讓 CSS `translateX(-50%)` 可以無縫循環。
+const rowA = [testimonials[0], testimonials[2], testimonials[5], testimonials[4]];
+const rowB = [testimonials[1], testimonials[3], testimonials[2]];
+
+function MarqueeRow({ items, variant }: { items: string[]; variant?: "b" }) {
+  const doubled = [...items, ...items];
+  return (
+    <div className={variant ? `row ${variant}` : "row"}>
+      {doubled.map((quote, i) => (
+        <Fragment key={i}>
+          <span>「{quote}」</span>
+          {i < doubled.length - 1 && <i aria-hidden>✦</i>}
+        </Fragment>
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
+  const [heroCasualBefore, heroCasualAfter] = heroCasual.split("好玩");
+
   return (
     <div>
-      {/* 首屏：Marquee Hero——只有主張句，沒有按鈕、沒有圖、沒有副標 */}
-      <section className="px-[var(--space-md)] sm:px-[var(--space-xl)] pt-[var(--space-xl)] sm:pt-[var(--space-xl)] pb-[var(--space-2xl)] sm:pb-[var(--space-3xl)] min-h-[56vh] sm:min-h-[68vh] flex flex-col justify-between">
-        <div className="max-w-[var(--container)] mx-auto w-full flex-1 flex flex-col justify-center">
-          <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.1] tracking-[-0.01em] text-[length:var(--text-display)] text-[var(--color-ink)]">
-            <span className="block">
-              {heroFormal
-                .split("，")
-                .filter(Boolean)
-                .map((seg) => (
-                  <span key={seg} className="inline-block whitespace-nowrap">
-                    {seg}，
-                  </span>
-                ))}
-            </span>
-            <span className="block whitespace-nowrap">
-              {heroCasual.split("好玩").map((part, i, arr) => (
-                <span key={i}>
-                  {part}
-                  {i < arr.length - 1 && (
-                    <span className="text-[var(--color-accent)]">好玩</span>
-                  )}
+      {/* 1. 首屏（navy，與共用 Header 同色無縫接軌） */}
+      <section className="navy">
+        <div className="wrap">
+          <div className="hero-grid">
+            <div>
+              <p className="byline">{profile.title}</p>
+              <h1 className="hero-h1">
+                <span className="line">{heroFormal}</span>
+                <span className="line">
+                  {heroCasualBefore}
+                  <span className="play">好玩</span>
+                  {heroCasualAfter}
                 </span>
-              ))}
-            </span>
-          </h1>
-        </div>
-        <div className="max-w-[var(--container)] mx-auto w-full flex justify-end">
-          <p className="font-[family-name:var(--font-voice)] text-[length:var(--text-sm)] text-[var(--color-muted)]">
-            {profile.displayName} · {profile.title}
-          </p>
+              </h1>
+              <p className="sub">{heroSubhead}</p>
+              <div className="actions">
+                <CTALink href="/speaking" className="btn">
+                  邀請演講 →
+                </CTALink>
+                <CTALink href="#topics-home" className="link">
+                  看四個講題
+                </CTALink>
+              </div>
+            </div>
+            <div className="portrait">
+              <Image
+                src={profile.heroImage}
+                alt={`${profile.displayName} 形象照`}
+                fill
+                sizes="(max-width: 760px) 100vw, 40vw"
+                style={{ objectFit: "cover", objectPosition: "50% 20%" }}
+                priority
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 首屏下方一條 2px 粗線，全站唯一的線 */}
-      <div aria-hidden className="h-[2px] w-full bg-[var(--color-ink)]" />
+      {/* 2. 數據＋照片條 */}
+      <Section className="nums">
+        {stats.map((s) => (
+          <div className="num" key={s.label}>
+            <b>
+              {s.value}
+              {s.suffix && <small>{s.suffix}</small>}
+            </b>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </Section>
+      <div className="strip">
+        {stripImages.map((src) => (
+          <div className="strip-img" key={src}>
+            <Image src={src} alt="" fill sizes="220px" style={{ objectFit: "cover" }} />
+          </div>
+        ))}
+      </div>
 
-      {/* 自介段 */}
-      <Section padding="pt-[var(--space-2xl)] pb-[var(--space-xl)]">
-        <div className="max-w-[var(--measure)]">
-          <p className="text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
-            （待里歐提供：兩句話講你是誰、為什麼做性平教育）
-          </p>
-          <p className="mt-[var(--space-md)] font-[family-name:var(--font-voice)] text-[length:var(--text-base)] text-[var(--color-accent)]">
-            {heroSubhead}
-          </p>
+      {/* 3. 台下怎麼說 */}
+      <Section className="voices">
+        <div className="head">
+          <Heading formal="台下怎麼說" casual="不是我說的，是台下寫的" />
+        </div>
+        <div className="rows">
+          <MarqueeRow items={rowA} />
+          <MarqueeRow items={rowB} variant="b" />
         </div>
       </Section>
 
-      {/* 三個數字：一行純文字，不是格子 */}
-      <Section padding="py-[var(--space-xl)]">
-        <p className="flex flex-wrap items-baseline gap-x-[var(--space-lg)] gap-y-[var(--space-xs)]">
-          {visibleStats.map((s, i) => (
-            <span
-              key={s.label}
-              className="inline-flex items-baseline gap-[var(--space-xs)]"
-            >
-              {i > 0 && (
-                <span aria-hidden className="hidden sm:inline text-[var(--color-rule)]">
-                  ・
-                </span>
-              )}
-              <span className="font-[family-name:var(--font-display)] text-[length:var(--text-2xl)] [font-variant-numeric:tabular-nums] text-[var(--color-ink)]">
-                {s.value}
-              </span>
-              <span className="text-[length:var(--text-sm)] text-[var(--color-ink-2)]">
-                {s.label}
-              </span>
-            </span>
-          ))}
-        </p>
+      {/* 4. 為什麼是他 */}
+      <Section className="who">
+        <div className="head">
+          <Heading formal="為什麼是他" casual="三個身份，一起作證" />
+        </div>
+        {identityRows.map((row) => (
+          <div className={row.reverse ? "who-row rev" : "who-row"} key={row.role}>
+            <div className="ph">
+              <Image
+                src={row.image}
+                alt=""
+                fill
+                sizes="(max-width: 760px) 100vw, 45vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div>
+              <p className="role">
+                {row.role}
+                <small>{row.roleNote}</small>
+              </p>
+              <p className="t">{row.body}</p>
+              <p className="kw">{row.keywords}</p>
+            </div>
+          </div>
+        ))}
       </Section>
 
-      {/* 一句聽眾的話：T1 pull quote，允許出格到 52rem */}
-      <Section padding="py-[var(--space-3xl)]">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,max-content)_minmax(0,24rem)] gap-x-[var(--space-3xl)] gap-y-[var(--space-lg)] items-start">
-          <div className="max-w-[min(52rem,100%)]">
-            <p className="font-[family-name:var(--font-display)] text-[length:var(--text-2xl)] leading-snug text-[var(--color-ink)] [text-indent:-0.5em]">
-              「{pullQuote.quote}」
+      {/* 5. 信念 */}
+      <section className="navy credo">
+        <div className="wrap">
+          <p className="note">{credo.note}</p>
+          <p className="big">
+            {credo.bigLine1}
+            <br />
+            <em>{credo.bigLine2Em}</em>
+          </p>
+          <p className="small">{credo.small}</p>
+        </div>
+      </section>
+
+      {/* 6. 四個講題 */}
+      <Section id="topics-home" className="topics">
+        <div className="head">
+          <Heading formal="四個講題" casual="挑你要的，深淺我來調" />
+        </div>
+        {topics.map((topic) => (
+          <div className="topic" key={topic.no}>
+            <div>
+              <h3>{topic.title}</h3>
+              <p className="fit">{topic.fit}</p>
+              <p className="s">{topic.homeSummary}</p>
+            </div>
+            <div className="covers">
+              {topic.homeCovers.map((src) => (
+                <div className="cover-img" key={src}>
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 760px) 45vw, 25vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </Section>
+
+      {/* 7. 可以怎麼請他 */}
+      <Section className="formats">
+        <div className="head">
+          <Heading formal="可以怎麼請他" casual="從一場演講到整天工作坊" />
+        </div>
+        {formats.map((f) => (
+          <div className="fmt" key={f.title}>
+            <h4>{f.title}</h4>
+            <p>{f.homeLine}</p>
+            <span className="dur">{f.homeDuration}</span>
+          </div>
+        ))}
+      </Section>
+
+      {/* 8. 回頭再邀＋合作單位 */}
+      <Section className="again">
+        <div className="again-grid">
+          <div>
+            <p className="big">
+              {referralCount.number}
+              <small>{referralCount.suffix}</small>
             </p>
-            <p className="mt-[var(--space-xs)] text-[length:var(--text-sm)] text-[var(--color-muted)]">
-              {pullQuote.org}
+            <p className="lead">
+              {referralLeadLines[0]}
+              <br />
+              {referralLeadLines[1]}
             </p>
           </div>
-          <div className="lg:pt-[var(--space-xs)] space-y-[var(--space-xs)]">
-            {sideQuotes.map((t) => (
-              <p
-                key={t.quote}
-                className="text-[length:var(--text-base)] text-[var(--color-ink-2)]"
-              >
-                {t.quote}
+          <div>
+            {referralChains.map((chain, i) => (
+              <p className="chain" key={i}>
+                {chain.map((node, j) => (
+                  <Fragment key={node}>
+                    <em>{node}</em>
+                    {j < chain.length - 1 && <i aria-hidden>→</i>}
+                  </Fragment>
+                ))}
               </p>
             ))}
+            <p className="chain-note">{referralNote}</p>
           </div>
         </div>
-      </Section>
-
-      {/* 講題：雙聲道標題＋四行純文字列 */}
-      <Section padding="py-[var(--space-2xl)]">
-        <SectionTitle formal="四個講題" casual="挑你要的，深淺我來調" />
-        <div className="mt-[var(--space-lg)] max-w-[var(--measure)]">
-          {topics.map((topic, i) => (
-            <div
-              key={topic.no}
-              className="flex flex-wrap items-baseline justify-between gap-x-[var(--space-md)] gap-y-[var(--space-xs)] py-[var(--space-sm)]"
-            >
-              <span className="text-[length:var(--text-base)] text-[var(--color-ink)]">
-                {topic.title}
-              </span>
-              <CTALink href={`/speaking#topic-${i + 1}`}>看內容 →</CTALink>
+        <div className="logos">
+          {cityLogos.map((logo) => (
+            <div className="logo-img" key={logo.slug}>
+              <Image
+                src={`/images/logo-${logo.slug}.png`}
+                alt={logo.name}
+                fill
+                sizes="120px"
+                style={{ objectFit: "contain" }}
+              />
             </div>
           ))}
         </div>
-      </Section>
-
-      {/* 邀請過的單位 */}
-      <Section padding="py-[var(--space-2xl)]">
-        <SectionTitle formal="他們請過我" casual="政府、學校、企業都有" />
-        <div className="mt-[var(--space-lg)] max-w-[var(--measure)] space-y-[var(--space-sm)]">
-          {clientColumns.map((col) => (
-            <p
-              key={col.label}
-              className="text-[length:var(--text-sm)] text-[var(--color-muted)] leading-[1.7]"
-            >
-              <span className="text-[var(--color-ink-2)]">{col.label}：</span>
-              {col.items.join("、")}
-            </p>
-          ))}
-        </div>
-      </Section>
-
-      {/* 一張照片 */}
-      <Section padding="pt-[var(--space-2xl)] pb-0">
-        <figure className="max-w-[min(52rem,100%)]">
-          <Placeholder label="授課現場照片，待補" ratio="aspect-[16/7]" />
-        </figure>
+        <p className="all">
+          {clientsSummaryLine}{" "}
+          <CTALink href="/speaking#clients" className="link-ink">
+            看全部合作單位 →
+          </CTALink>
+        </p>
       </Section>
     </div>
   );

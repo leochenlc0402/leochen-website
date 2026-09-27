@@ -1,7 +1,6 @@
-/* Hallmark · genre: editorial · macrostructure: Index-First · design-system: design.md · designed-as-app · nav: N1a · footer: Ft6 · pre-emit critique: P4 H4 E4 S4 R4 V4 */
 import type { Metadata } from "next";
 import Section from "@/components/Section";
-import SectionTitle from "@/components/SectionTitle";
+import Heading from "@/components/Heading";
 import CTALink from "@/components/CTALink";
 import { videoWorks, pressItems, podcast, getYoutubeEmbedId } from "@/data/media";
 import { profile } from "@/data/profile";
@@ -20,18 +19,19 @@ export const metadata: Metadata = {
 export default function MediaPage() {
   return (
     <div>
-      <Section padding="pt-[var(--space-xl)] sm:pt-[var(--space-2xl)] pb-[var(--space-xl)]">
-        <SectionTitle as="h1" formal="作品與報導" casual="銀獎那支排第一" />
+      {/* 頁首（navy） */}
+      <Section className="navy page-head">
+        <Heading as="h1" formal="作品與報導" casual="銀獎那支排第一" />
       </Section>
 
       {/* 影音作品 */}
-      <Section padding="py-[var(--space-xl)]">
-        <div className="max-w-[var(--container-wide)] grid grid-cols-1 md:grid-cols-2 gap-x-[var(--space-2xl)] gap-y-[var(--space-xl)]">
+      <Section className="resume-block">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
           {videoWorks.map((video) => {
             const embedId = getYoutubeEmbedId(video.youtubeUrl);
             return (
               <div key={video.youtubeUrl}>
-                <h3 className="mb-[var(--space-sm)] font-[family-name:var(--font-display)] text-[length:var(--text-lg)] text-[var(--color-ink)]">
+                <h3 className="mb-3 font-[family-name:var(--font-serif)] font-bold text-[22px] text-[var(--color-navy)]">
                   {video.title}
                 </h3>
                 <div className="aspect-video bg-[var(--color-paper-2)]">
@@ -46,11 +46,11 @@ export default function MediaPage() {
                     />
                   )}
                 </div>
-                <p className="mt-[var(--space-sm)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+                <p className="mt-3 text-[16px] text-[var(--color-ink-2)] leading-[1.75]">
                   {video.description}
                 </p>
                 {video.award && (
-                  <p className="mt-[var(--space-xs)] text-[length:var(--text-sm)] text-[var(--color-muted)]">
+                  <p className="mt-2 text-[14px] text-[var(--color-muted)]">
                     {video.award.replace(/^本片榮獲/, "")}
                   </p>
                 )}
@@ -61,26 +61,28 @@ export default function MediaPage() {
       </Section>
 
       {/* 媒體報導 */}
-      <Section padding="py-[var(--space-xl)]">
-        <SectionTitle formal="媒體報導" casual="按時間排，新的在前面" />
-        <ol className="mt-[var(--space-lg)] space-y-[var(--space-lg)]">
+      <Section className="resume-block">
+        <div className="head">
+          <Heading formal="媒體報導" casual="按時間排，新的在前面" />
+        </div>
+        <ol className="space-y-8">
           {pressItems.map((item) => (
             <li key={item.url}>
-              <div className="flex flex-wrap items-baseline gap-x-[var(--space-sm)] gap-y-[var(--space-xs)]">
-                <span className="text-[length:var(--text-sm)] text-[var(--color-muted)]">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-[14px] text-[var(--color-muted)]">
                   {item.outlet}
                 </span>
-                <span className="text-[length:var(--text-sm)] [font-variant-numeric:tabular-nums] text-[var(--color-muted)]">
+                <span className="text-[14px] [font-variant-numeric:tabular-nums] text-[var(--color-muted)]">
                   {item.date}
                 </span>
               </div>
               <CTALink
                 href={item.url}
-                className="mt-[var(--space-xs)] block font-[family-name:var(--font-display)] text-[length:var(--text-lg)]"
+                className="link-ink mt-1 block w-fit font-[family-name:var(--font-serif)] font-bold text-[20px]"
               >
                 {item.title}
               </CTALink>
-              <p className="mt-[var(--space-xs)] max-w-[var(--measure)] text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+              <p className="mt-1 max-w-[40em] text-[16px] text-[var(--color-ink-2)] leading-[1.75]">
                 {item.summary}
               </p>
             </li>
@@ -89,14 +91,16 @@ export default function MediaPage() {
       </Section>
 
       {/* Podcast */}
-      <Section padding="pt-[var(--space-xl)] pb-0">
-        <SectionTitle formal="Podcast" casual="想聽我們兩個聊真心話，來這裡" />
-        <div className="mt-[var(--space-lg)] max-w-[var(--measure)]">
-          <p className="text-[length:var(--text-base)] text-[var(--color-ink-2)] leading-[1.7]">
+      <Section className="resume-block">
+        <div className="head">
+          <Heading formal="Podcast" casual="想聽我們兩個聊真心話，來這裡" />
+        </div>
+        <div className="max-w-[40em]">
+          <p className="text-[17px] text-[var(--color-ink-2)] leading-[1.85]">
             {podcast.description}
           </p>
-          <p className="mt-[var(--space-md)]">
-            <CTALink href={podcast.url} className="text-[length:var(--text-base)]">
+          <p className="mt-4">
+            <CTALink href={podcast.url} className="link-ink text-[17px]">
               收聽 {podcast.name} →
             </CTALink>
           </p>

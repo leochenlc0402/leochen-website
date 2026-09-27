@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import { LXGW_WenKai_TC, Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import EndCTA from "@/components/EndCTA";
 import { profile } from "@/data/profile";
 
-// 三個字型直接掛成 design.md 鎖定的 token 名稱：--font-display / --font-body / --font-voice。
-// 字級與字重只用 design.md 指定的那一組，不多帶其他 weight。
+// 三個字型掛成設計系統鎖定的 token 名稱：--font-serif / --font-sans / --font-voice。
+// 標題用宋體 700、900；內文用黑體 400、500；口語聲道用文楷 400。
 const notoSerifTC = Noto_Serif_TC({
-  variable: "--font-display",
+  variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["700", "900"],
 });
 
 const notoSansTC = Noto_Sans_TC({
-  variable: "--font-body",
+  variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500"],
 });
 
 const wenKaiTC = LXGW_WenKai_TC({
@@ -25,6 +25,9 @@ const wenKaiTC = LXGW_WenKai_TC({
   weight: ["400"],
 });
 
+// 預覽部署用：正式網域上線前用環境變數關掉索引，上線後把環境變數拿掉即可，不用改程式碼。
+const noindex = process.env.NEXT_PUBLIC_NOINDEX === "1";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://leochen.example"),
   title: {
@@ -32,16 +35,19 @@ export const metadata: Metadata = {
     template: `%s｜${profile.displayName}`,
   },
   description:
-    "陳荐宏 Leo Chen，性平講師 × 社群媒體創作者。演講主題：性別平等、多元性別、公共溝通、社群創作。演講邀約請來信。",
+    "陳荐宏 Leo Chen，性平講師 × 社群媒體創作者。演講主題：性別平等與 CEDAW、多元性別、性別與公共生活、媒體社群與內容創作。演講邀約請來信。",
   openGraph: {
     title: `${profile.displayName} — ${profile.title}`,
     description:
-      "性平講師與社群媒體創作者，累積 80 多場演講經驗，提供性別平等、多元性別與公共溝通主題的演講邀約。",
+      "把法定必修，講成大家想聽的那一堂。80 多場演講經驗，性平講師陳荐宏 Leo Chen 個人網站首頁。",
     url: "https://leochen.example",
     siteName: profile.displayName,
     locale: "zh_TW",
     type: "website",
   },
+  ...(noindex
+    ? { robots: { index: false, follow: false } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -52,10 +58,10 @@ export default function RootLayout({
       lang="zh-TW"
       className={`${notoSerifTC.variable} ${notoSansTC.variable} ${wenKaiTC.variable}`}
     >
-      <body className="min-h-screen flex flex-col bg-[var(--color-paper)] text-[var(--color-ink)]">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-screen flex flex-col bg-[var(--color-paper)] text-[var(--color-navy)]">
+        <Header />
+        <main className="flex-1 flex flex-col">{children}</main>
+        <EndCTA />
       </body>
     </html>
   );

@@ -7,7 +7,6 @@ export const profile = {
   displayName: "陳荐宏 Leo Chen",
   title: "性平講師 × 社群媒體創作者",
   email: "leochenlc0402@gmail.com",
-  // 形象照尚未提供，先用色塊占位，正式照片到位後把這個路徑換掉即可。
-  heroImagePlaceholder: "/placeholder/portrait.svg",
-  departFrom: "新北板橋",
+  heroImage: "/images/jacket-wall.jpg",
+  aboutImage: "/images/plaid.jpg",
 } as const;
