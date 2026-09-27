@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: `%s｜${profile.displayName}`,
   },
   description:
-    "陳荐宏 Leo Chen，性平講師 × 社群媒體創作者。演講主題：性別平等與 CEDAW、多元性別、性別與公共生活、媒體社群與內容創作。演講邀約請來信。",
+    "陳荐宏 Leo Chen，性平講師 × 社群媒體創作者。演講主題：性別平等與 CEDAW、多元性別、性別與日常生活、媒體社群與內容創作。演講邀約請來信。",
   openGraph: {
     title: `${profile.displayName} — ${profile.title}`,
     description:

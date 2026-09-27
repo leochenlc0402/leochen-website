@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "陳荐宏 Leo Chen 演講邀約說明：來信需附資訊、演講費用（公務機關 4,000 元起）、四大講題與感謝邀請單位名單。",
   openGraph: {
     title: `演講邀約｜${profile.displayName}`,
-    description: "性別平等與 CEDAW、多元性別、性別與公共生活、媒體社群與內容創作，四大講題歡迎來信邀約。",
+    description: "性別平等與 CEDAW、多元性別、性別與日常生活、媒體社群與內容創作，四大講題歡迎來信邀約。",
     type: "website",
   },
 };
@@ -37,7 +37,7 @@ export default function SpeakingPage() {
     <div>
       {/* 頁首（navy） */}
       <Section className="navy page-head">
-        <Heading as="h1" formal="演講邀約" casual="來信就好，我會照活動安排回你" />
+        <Heading as="h1" formal="演講邀約" casual="歡迎寫信邀約，期待我們的緣分即將開始。" />
         <div className="mt-8">
           <CTALink href={buildMailtoHref()} className="btn">
             寫信邀請 →
@@ -67,7 +67,7 @@ export default function SpeakingPage() {
       {/* 費用怎麼算 */}
       <Section id="fees" className="resume-block">
         <div className="head">
-          <Heading formal="費用怎麼算" casual="一次講清楚" />
+          <Heading formal="關於費用" casual="讓合作規劃更完善" />
         </div>
         <p className="max-w-[40em] text-[17px] text-[var(--color-ink-2)] leading-[1.85] mb-8">
           {feeIntro}
@@ -102,16 +102,13 @@ export default function SpeakingPage() {
       {/* 四個講題（完整版） */}
       <Section id="topics" className="resume-block">
         <div className="head">
-          <Heading formal="四個講題" casual="挑你要的，深淺我來調" />
+          <Heading formal="四個講題" casual="挑選你的需求，深淺彈性配合" />
         </div>
         {topics.map((topic, i) => (
           <div className="topic-full" id={`topic-${i + 1}`} key={topic.no}>
             <h3>{topic.title}</h3>
             <p className="fit">{topic.fit}</p>
             <p className="s">{topic.subtopics.join("、")}</p>
-            <p className="mt-3 text-[14px] text-[var(--color-muted)]">
-              對應時數：{topic.legalHours}
-            </p>
             <div className="cover-pairs">
               {topic.coverSlugs.map((slug) => (
                 <div className="cover-pair" key={slug}>
@@ -143,7 +140,7 @@ export default function SpeakingPage() {
       {/* 五種合作形式 */}
       <Section className="resume-block">
         <div className="head">
-          <Heading formal="可以怎麼請他" casual="從一場演講到整天工作坊" />
+          <Heading formal="合作方式" casual="從一場演講到整天工作坊" />
         </div>
         {formats.map((f) => (
           <div className="fmt" key={f.title}>

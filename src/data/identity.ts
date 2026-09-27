@@ -13,7 +13,7 @@ export type IdentityRow = {
 export const identityRows: IdentityRow[] = [
   {
     role: "委員",
-    roleNote: "政府請他審別人的性平",
+    roleNote: "讓性別平等在各縣市開花結果",
     body: "新竹市、雲林縣政府性別平等委員，宜蘭、新竹、雲林三縣市性別人才資料庫專家學者。在台灣彩虹平權大平台與議員、性別團體合作，促成各縣市議會超過 300 案相關質詢與提案。",
     keywords: "性別主流化 · CEDAW · 性別平等政策",
     image: "/images/committee.jpg",
@@ -29,7 +29,7 @@ export const identityRows: IdentityRow[] = [
   {
     role: "當事人",
     roleNote: "講的是自己的人生",
-    body: "公開的同志伴侶，和阿凱一起寫下《不OK的我們也很好》，把長跑九年的關係練習攤開來講。講多元家庭與伴侶關係時，他不是在念教材。",
+    body: "公開的同志伴侶，和阿凱一起寫下《不OK的我們也很好》，把長跑九年的關係練習攤開來講。講多元家庭與伴侶關係時，我不是在念教材。",
     keywords: "多元性別 · 伴侶關係 · 婚姻平權",
     image: "/images/book.jpg",
   },

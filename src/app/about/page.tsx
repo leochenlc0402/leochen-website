@@ -82,7 +82,7 @@ export default function AboutPage() {
         <div className="head">
           <Heading
             formal="學歷"
-            casual="從公關廣告念到口語傳播，一路都在學怎麼跟人講話"
+            casual="從公關廣告唸到口語傳播，一路都在練習與人的溝通和對話。"
           />
         </div>
         <SpecTable
@@ -93,7 +93,7 @@ export default function AboutPage() {
       {/* 公部門服務 */}
       <Section className="resume-block">
         <div className="head">
-          <Heading formal="公部門服務" casual="政府請他審別人的性平" />
+          <Heading formal="公部門服務" casual="與各地政府並肩，創造友善環境。" />
         </div>
         <SpecTable rows={publicService.map((item) => ({ dd: item }))} />
       </Section>
@@ -101,7 +101,7 @@ export default function AboutPage() {
       {/* 民間組織 */}
       <Section className="resume-block">
         <div className="head">
-          <Heading formal="民間組織" casual="性平圈子裡也待過理事會" />
+          <Heading formal="民間組織" casual="讓公民行動成為推動友善的力量" />
         </div>
         <SpecTable rows={privateService.map((item) => ({ dd: item }))} />
       </Section>
@@ -109,7 +109,7 @@ export default function AboutPage() {
       {/* 專業資格 */}
       <Section className="resume-block">
         <div className="head">
-          <Heading formal="專業資格" casual="縣市政府的性別人才資料庫都掛得到他" />
+          <Heading formal="專業資格" casual="讓性別人才資料庫，為你的選擇多一重保障" />
         </div>
         <SpecTable rows={qualifications.map((item) => ({ dd: item }))} />
       </Section>
@@ -134,7 +134,7 @@ export default function AboutPage() {
       {/* 出版與研究：專書／政策諮詢與專案顧問／論文與學術發表 */}
       <Section className="resume-block">
         <div className="head">
-          <Heading formal="出版與研究" casual="從書到論文，白紙黑字都在這" />
+          <Heading formal="出版與研究" casual="從專書到論文，記下與這片土地的重要時刻" />
         </div>
         <SpecTable
           rows={[

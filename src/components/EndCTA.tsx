@@ -10,7 +10,7 @@ export default function EndCTA() {
     <section className="navy end">
       <div className="wrap">
         <h2 className="h2">
-          下一場性平課，
+          下一場和你的性平課，
           <br />
           交給里歐。
         </h2>

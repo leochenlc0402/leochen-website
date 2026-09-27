@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Section from "@/components/Section";
 import Heading from "@/components/Heading";
 import CTALink from "@/components/CTALink";
+import StatCounter from "@/components/StatCounter";
 import { profile } from "@/data/profile";
 import { stats } from "@/data/stats";
 import { topics } from "@/data/topics";
@@ -13,7 +14,6 @@ import { identityRows, credo } from "@/data/identity";
 import {
   clientsSummaryLine,
   cityLogos,
-  referralChains,
   referralCount,
   referralLeadLines,
   referralNote,
@@ -108,16 +108,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. 數據＋照片條 */}
+      {/* 2. 數據＋照片條（數字捲入視窗時跑動畫，見 StatCounter） */}
       <Section className="nums">
         {stats.map((s) => (
-          <div className="num" key={s.label}>
-            <b>
-              {s.value}
-              {s.suffix && <small>{s.suffix}</small>}
-            </b>
-            <span>{s.label}</span>
-          </div>
+          <StatCounter key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
         ))}
       </Section>
       <div className="strip">
@@ -137,7 +131,7 @@ export default function Home() {
       {/* 3. 台下怎麼說 */}
       <Section className="voices">
         <div className="head">
-          <Heading formal="台下怎麼說" casual="不是我說的，是台下寫的" />
+          <Heading formal="台下怎麼說" casual="那些講座後綻放的火花" />
         </div>
         <div className="rows">
           <MarqueeRow items={rowA} />
@@ -148,7 +142,7 @@ export default function Home() {
       {/* 4. 為什麼是他 */}
       <Section className="who">
         <div className="head">
-          <Heading formal="為什麼是他" casual="三個身份，一起作證" />
+          <Heading formal="為什麼選擇我" casual="三個身分，不同面的我" />
         </div>
         {identityRows.map((row) => (
           <div className={row.reverse ? "who-row rev" : "who-row"} key={row.role}>
@@ -189,7 +183,7 @@ export default function Home() {
       {/* 6. 四個講題 */}
       <Section id="topics-home" className="topics">
         <div className="head">
-          <Heading formal="四個講題" casual="挑你要的，深淺我來調" />
+          <Heading formal="四個講題" casual="挑選你的需求，深淺彈性配合" />
         </div>
         {topics.map((topic) => (
           <div className="topic" key={topic.no}>
@@ -218,7 +212,7 @@ export default function Home() {
       {/* 7. 可以怎麼請他 */}
       <Section className="formats">
         <div className="head">
-          <Heading formal="可以怎麼請他" casual="從一場演講到整天工作坊" />
+          <Heading formal="合作方式" casual="從一場演講到整天工作坊" />
         </div>
         {formats.map((f) => (
           <div className="fmt" key={f.title}>
@@ -237,23 +231,18 @@ export default function Home() {
               {referralCount.number}
               <small>{referralCount.suffix}</small>
             </p>
-            <p className="lead">
-              {referralLeadLines[0]}
-              <br />
-              {referralLeadLines[1]}
-            </p>
+            <p className="lead">{referralLeadLines[0]}</p>
           </div>
           <div>
-            {referralChains.map((chain, i) => (
-              <p className="chain" key={i}>
-                {chain.map((node, j) => (
-                  <Fragment key={node}>
-                    <em>{node}</em>
-                    {j < chain.length - 1 && <i aria-hidden>→</i>}
-                  </Fragment>
-                ))}
-              </p>
-            ))}
+            <div className="referral-photo">
+              <Image
+                src="/images/audience.jpg"
+                alt=""
+                fill
+                sizes="(max-width: 760px) 100vw, 55vw"
+                style={{ objectFit: "cover", objectPosition: "50% 25%" }}
+              />
+            </div>
             <p className="chain-note">{referralNote}</p>
           </div>
         </div>

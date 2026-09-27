@@ -603,24 +603,13 @@ h1.hero-h1 .play {
   font-size: 26px;
   line-height: 1.45;
 }
-.chain {
-  padding: 18px 0;
-  border-top: 1px solid var(--color-rule);
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--color-navy);
+.referral-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
 }
-.chain:last-of-type {
-  border-bottom: 1px solid var(--color-rule);
-}
-.chain em {
-  font-style: normal;
-  white-space: nowrap;
-}
-.chain i {
-  font-style: normal;
-  color: var(--color-coral);
-  margin: 0 14px;
+.referral-photo img {
+  object-fit: cover;
 }
 .chain-note {
   margin-top: 16px;
@@ -714,6 +703,20 @@ h1.hero-h1 .play {
 }
 .resume-block + .resume-block {
   border-top: 1px solid var(--color-rule);
+}
+
+/* ---------- /media：兩支影音左右對齊（片名／影片／說明三列各自對齊） ---------- */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto 1fr;
+  column-gap: 48px;
+  row-gap: 12px;
+}
+.video-card {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
 }
 
 .two-col {
@@ -914,12 +917,6 @@ h1.hero-h1 .play {
   .again .big {
     font-size: 88px;
   }
-  .chain {
-    font-size: 16px;
-  }
-  .chain i {
-    margin: 0 8px;
-  }
   .logos {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
@@ -942,6 +939,14 @@ h1.hero-h1 .play {
   }
   .resume-block {
     padding: 40px 0;
+  }
+  .video-grid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+  .video-card {
+    grid-row: auto;
+    grid-template-rows: none;
   }
 }
 

@@ -57,8 +57,8 @@ export const topics: Topic[] = [
   },
   {
     no: "③",
-    title: "性別與公共生活",
-    fit: "職場、醫療、公共空間都講過",
+    title: "性別與日常生活",
+    fit: "職場、醫療、友善廁所，提供各種講題。",
     homeSummary:
       "性別友善廁所、性別友善職場、性別與政策推動、性別與媒體、性別與政治、性別與民俗及宗教",
     subtopics: [
@@ -87,7 +87,7 @@ export const topics: Topic[] = [
       "個人品牌與內容創作",
     ],
     legalHours: "性別主流化",
-    homeCovers: ["/images/cover-talk.jpg", "/images/fufu-stage.jpg"],
-    coverSlugs: ["communication"],
+    homeCovers: ["/images/cover-talk.jpg", "/images/covers/talk2-cover.jpg"],
+    coverSlugs: ["communication", "talk2"],
   },
 ];

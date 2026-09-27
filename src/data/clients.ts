@@ -136,15 +136,8 @@ export const cityLogos: { slug: string; name: string }[] = [
   { slug: "kaohsiung", name: "高雄市政府" },
 ];
 
-// 回頭再邀鏈：承辦聽完覺得讚，回去用自己單位的名義再邀一場。
-// 來源：leo-answers-2026-09-27.md〈回頭再邀〉，逐字；共用中間節點的鏈合併成一條
-// （雲林社會處→雲林環保局→宜蘭環保局），照定稿靜態稿 final-home.html 呈現。
-export const referralChains: string[][] = [
-  ["雲林縣政府社會處", "雲林縣政府環保局", "宜蘭縣政府環保局"],
-  ["新竹市政府社會處", "新竹市政府人事處"],
-  ["高雄市政府社會處", "嘉義縣政府社會處"],
-];
-
 export const referralCount = { number: "10", suffix: "+" };
-export const referralLeadLines = ["個單位聽完之後，", "又請了第二場。"];
+// 2026-09-28 第二輪修改：拿掉三條轉介鏈文字（改放演講照片，見 page.tsx），
+// 大字下方那句改成單行，逐字照 leo-answers-2026-09-27.md 第二輪回覆。
+export const referralLeadLines = ["個單位，再次邀約第二場的延續——"];
 export const referralNote = "承辦聽完覺得讚，回去用自己單位的名義再邀一場";

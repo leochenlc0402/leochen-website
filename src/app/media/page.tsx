@@ -21,16 +21,16 @@ export default function MediaPage() {
     <div>
       {/* 頁首（navy） */}
       <Section className="navy page-head">
-        <Heading as="h1" formal="作品與報導" casual="銀獎那支排第一" />
+        <Heading as="h1" formal="作品與報導" casual="用影像說性平" />
       </Section>
 
       {/* 影音作品 */}
       <Section className="resume-block">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+        <div className="video-grid">
           {videoWorks.map((video) => {
             const embedId = getYoutubeEmbedId(video.youtubeUrl);
             return (
-              <div key={video.youtubeUrl}>
+              <div className="video-card" key={video.youtubeUrl}>
                 <h3 className="mb-3 font-[family-name:var(--font-serif)] font-bold text-[22px] text-[var(--color-navy)]">
                   {video.title}
                 </h3>
@@ -46,14 +46,16 @@ export default function MediaPage() {
                     />
                   )}
                 </div>
-                <p className="mt-3 text-[16px] text-[var(--color-ink-2)] leading-[1.75]">
-                  {video.description}
-                </p>
-                {video.award && (
-                  <p className="mt-2 text-[14px] text-[var(--color-muted)]">
-                    {video.award.replace(/^本片榮獲/, "")}
+                <div>
+                  <p className="mt-3 text-[16px] text-[var(--color-ink-2)] leading-[1.75]">
+                    {video.description}
                   </p>
-                )}
+                  {video.award && (
+                    <p className="mt-2 text-[14px] text-[var(--color-muted)]">
+                      {video.award.replace(/^本片榮獲/, "")}
+                    </p>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -63,7 +65,7 @@ export default function MediaPage() {
       {/* 媒體報導 */}
       <Section className="resume-block">
         <div className="head">
-          <Heading formal="媒體報導" casual="按時間排，新的在前面" />
+          <Heading formal="媒體報導" casual="被看見的那些時刻" />
         </div>
         <ol className="space-y-8">
           {pressItems.map((item) => (
