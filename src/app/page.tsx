@@ -32,13 +32,17 @@ export const metadata: Metadata = {
   },
 };
 
+// 授課現場照片條：每張都裁成 4:5，x 位置對準拿麥克風的講者（里歐），讓他落在畫面中央。
+// 位置是逐張看圖量出來的，換照片時要重新量。
 const stripImages = [
-  "/images/audience.jpg",
-  "/images/sign.jpg",
-  "/images/pink-screen.jpg",
-  "/images/workshop.jpg",
-  "/images/rainbow-mic.jpg",
-  "/images/overalls.jpg",
+  { src: "/images/audience.jpg", x: 93 },
+  { src: "/images/sign.jpg", x: 88 },
+  { src: "/images/pink-screen.jpg", x: 78 },
+  { src: "/images/diverse.jpg", x: 38 },
+  { src: "/images/rainbow-mic.jpg", x: 75 },
+  { src: "/images/overalls.jpg", x: 41 },
+  { src: "/images/chair.jpg", x: 50 },
+  { src: "/images/pink-mic.jpg", x: 76 },
 ];
 
 // 兩排跑馬燈的內容，取自 src/data/testimonials.ts（未新增任何一句），
@@ -117,9 +121,15 @@ export default function Home() {
         ))}
       </Section>
       <div className="strip">
-        {stripImages.map((src) => (
+        {stripImages.map(({ src, x }) => (
           <div className="strip-img" key={src}>
-            <Image src={src} alt="" fill sizes="220px" style={{ objectFit: "cover" }} />
+            <Image
+              src={src}
+              alt=""
+              fill
+              sizes="(max-width: 760px) 176px, 288px"
+              style={{ objectFit: "cover", objectPosition: `${x}% 50%` }}
+            />
           </div>
         ))}
       </div>

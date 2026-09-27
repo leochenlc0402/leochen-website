@@ -277,13 +277,13 @@ h1.hero-h1 .play {
   margin-top: 72px;
   display: flex;
   gap: 10px;
-  height: 300px;
+  height: 360px;
   overflow: hidden;
 }
 .strip .strip-img {
   position: relative;
   height: 100%;
-  width: 220px;
+  aspect-ratio: 4 / 5;
   flex: none;
 }
 .strip .strip-img img {
@@ -510,7 +510,7 @@ h1.hero-h1 .play {
 }
 .fmt {
   display: grid;
-  grid-template-columns: 14em 1fr 9em;
+  grid-template-columns: 16em 1fr 9em;
   gap: 32px;
   align-items: baseline;
   padding: 22px 0;
@@ -547,7 +547,7 @@ h1.hero-h1 .play {
 /* 兩欄 hairline 表（費用說明、履歷） */
 .spec-row {
   display: grid;
-  grid-template-columns: 14em 1fr;
+  grid-template-columns: 16em 1fr;
   gap: 24px;
   align-items: baseline;
   padding: 18px 0;
@@ -842,11 +842,8 @@ h1.hero-h1 .play {
     font-size: 40px;
   }
   .strip {
-    height: 190px;
+    height: 220px;
     margin-top: 48px;
-  }
-  .strip .strip-img {
-    width: 140px;
   }
   .h2 {
     font-size: 30px;
@@ -901,7 +898,8 @@ h1.hero-h1 .play {
     grid-template-columns: 1fr auto;
     gap: 6px 16px;
   }
-  .fmt p {
+  .fmt p,
+  .fmt > div {
     grid-column: 1 / -1;
     grid-row: 2;
   }
@@ -960,4 +958,12 @@ h1.hero-h1 .play {
   .links a {
     transition: none;
   }
+}
+
+/* 斷行：標題平均分行、段落避免最後一行只剩一個字（創晃 9/27：不准有單字落行） */
+h1, h2, h3, h4, .h2, .role, .fmt h4, .spec-row dt, .topic h3, .lead {
+  text-wrap: balance;
+}
+p, li, dd, .note, .chain, .all {
+  text-wrap: pretty;
 }

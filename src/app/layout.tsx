@@ -3,6 +3,7 @@ import { LXGW_WenKai_TC, Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import EndCTA from "@/components/EndCTA";
+import NoOrphans from "@/components/NoOrphans";
 import { profile } from "@/data/profile";
 
 // 三個字型掛成設計系統鎖定的 token 名稱：--font-serif / --font-sans / --font-voice。
@@ -62,6 +63,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
         <EndCTA />
+        <NoOrphans />
       </body>
     </html>
   );
