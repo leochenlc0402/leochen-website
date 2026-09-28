@@ -716,54 +716,74 @@ h1.hero-h1 .play {
 
 /* ---------- /about：座右銘、故事線、經歷亮點 ---------- */
 .values-block {
-  padding: 72px 0 0;
+  padding: var(--sec) 0 0;
+}
+.motto-wrap {
+  max-width: 40em;
 }
 .motto {
+  margin-top: 10px;
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 34px;
-  line-height: 1.4;
+  font-size: 40px;
+  line-height: 1.35;
   color: var(--color-navy);
-  max-width: 22em;
 }
-.values-list {
-  margin-top: 28px;
-  display: grid;
-  gap: 12px;
-  font-size: 18px;
+.motto-note {
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.85;
   color: var(--color-ink-2);
 }
-.values-list li {
-  padding-left: 18px;
-  border-left: 3px solid var(--color-gold);
+.values-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.value-card {
+  padding-top: 20px;
+  border-top: 2px solid var(--color-gold);
+}
+.value-label {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--color-teal);
+  margin-bottom: 12px;
+}
+.value-card p:not(.value-label) {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--color-ink-2);
+}
+.value-card p:not(.value-label) + p {
+  margin-top: 12px;
 }
 .story {
   padding: var(--sec) 0 32px;
 }
+/* 折衷版（2026-09-28）：讀起來仍是一整篇自介，年份退成左邊的淡色旁註 */
 .story-line {
   list-style: none;
-  max-width: 52em;
+  max-width: 48em;
 }
 .story-line li {
   display: grid;
-  grid-template-columns: 8em 1fr;
-  gap: 32px;
-  padding: 28px 0;
-  border-top: 1px solid var(--color-rule);
+  grid-template-columns: 5.5em 1fr;
+  gap: 24px;
+  margin-top: 20px;
 }
 .story-line li:first-child {
-  border-top: none;
-  padding-top: 0;
+  margin-top: 0;
 }
 .story-label {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 1.3;
-  color: var(--color-teal);
-}
-.story-belief .story-label {
-  color: var(--color-coral);
+  font-family: var(--font-voice);
+  font-size: 15px;
+  line-height: 1.85;
+  padding-top: 2px;
+  color: var(--color-gold);
+  text-align: right;
 }
 .story-body p {
   color: var(--color-ink-2);
@@ -771,7 +791,7 @@ h1.hero-h1 .play {
   line-height: 1.85;
 }
 .story-body p + p {
-  margin-top: 14px;
+  margin-top: 20px;
 }
 .highlights {
   padding: 48px 0 var(--sec);
@@ -806,9 +826,10 @@ h1.hero-h1 .play {
   color: var(--color-ink-2);
 }
 @media (max-width: 760px) {
-  .motto { font-size: 26px; }
-  .story-line li { grid-template-columns: 1fr; gap: 8px; }
-  .story-label { font-size: 20px; }
+  .motto { font-size: 28px; }
+  .values-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; }
+  .story-line li { grid-template-columns: 1fr; gap: 2px; }
+  .story-label { text-align: left; padding-top: 0; }
   .hl-grid { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
   .hl b { font-size: 34px; }
 }
