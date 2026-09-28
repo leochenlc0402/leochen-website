@@ -276,18 +276,31 @@ h1.hero-h1 .play {
   font-size: 15px;
   color: var(--color-ink-2);
 }
+/* 照片條：張數依螢幕寬度剛好排滿，不讓最右邊那張被螢幕邊緣切掉（2026-09-28 創晃指正） */
 .strip {
   margin-top: 72px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  height: 360px;
-  overflow: hidden;
 }
 .strip .strip-img {
   position: relative;
-  height: 100%;
   aspect-ratio: 4 / 5;
-  flex: none;
+}
+.strip .strip-img:nth-child(n + 6) {
+  display: none;
+}
+@media (min-width: 1600px) {
+  .strip { grid-template-columns: repeat(6, 1fr); }
+  .strip .strip-img:nth-child(6) { display: block; }
+}
+@media (max-width: 1024px) {
+  .strip { grid-template-columns: repeat(4, 1fr); }
+  .strip .strip-img:nth-child(5) { display: none; }
+}
+@media (max-width: 760px) {
+  .strip { grid-template-columns: repeat(3, 1fr); }
+  .strip .strip-img:nth-child(4) { display: none; }
 }
 .strip .strip-img img {
   object-fit: cover;
@@ -848,7 +861,6 @@ h1.hero-h1 .play {
     font-size: 40px;
   }
   .strip {
-    height: 220px;
     margin-top: 48px;
   }
   .h2 {

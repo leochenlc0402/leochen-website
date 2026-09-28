@@ -115,7 +115,7 @@ export default async function Home() {
               src={img.src}
               alt=""
               fill
-              sizes="(max-width: 760px) 176px, 288px"
+              sizes="(max-width: 760px) 33vw, (max-width: 1024px) 25vw, 20vw"
               style={{ objectFit: "cover", objectPosition: img.objectPosition }}
             />
           </div>
