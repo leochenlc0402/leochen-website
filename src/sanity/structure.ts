@@ -14,6 +14,7 @@ const singletonItems: { id: string; title: string }[] = [
 
 export const structure: StructureResolver = (S) =>
   S.list()
+    .id("content")
     .title("網站內容")
     .items(
       singletonItems.map(({ id, title }) =>

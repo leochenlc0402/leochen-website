@@ -37,6 +37,25 @@ if (!token) {
   process.exit(1);
 }
 
+
+// 陣列裡的物件一律補上 _key，否則 Studio 會顯示「Missing keys」而無法編輯。
+import crypto from "node:crypto";
+function addKeys(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => {
+      if (item && typeof item === "object" && !Array.isArray(item)) {
+        const withKeys = addKeys(item);
+        return withKeys._key ? withKeys : { _key: crypto.randomBytes(6).toString("hex"), ...withKeys };
+      }
+      return addKeys(item);
+    });
+  }
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, addKeys(v)]));
+  }
+  return value;
+}
+
 const client = createClient({ projectId, dataset, token, apiVersion: "2026-09-28", useCdn: false });
 
 // ---------- 圖片上傳（同一個路徑只上傳一次，用快取） ----------
@@ -590,7 +609,7 @@ async function main() {
   for (const [name, doc] of Object.entries(allDocs)) {
     console.log(`\n處理「${name}」...`);
     const resolved = await resolveImages(doc);
-    await client.createOrReplace(resolved);
+    await client.createOrReplace(addKeys(resolved));
     console.log(`  ✅ 已寫入並發布 _id=${resolved._id}`);
   }
   console.log("\n全部完成。");
