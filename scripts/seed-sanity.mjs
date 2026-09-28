@@ -41,7 +41,13 @@ const client = createClient({ projectId, dataset, token, apiVersion: "2026-09-28
 
 // ---------- 圖片上傳（同一個路徑只上傳一次，用快取） ----------
 const assetCache = new Map();
-async function uploadImage(relativePath) {
+let uploadQueue = Promise.resolve();
+function uploadImage(relativePath) {
+  const run = uploadQueue.then(() => uploadImageNow(relativePath));
+  uploadQueue = run.catch(() => {});
+  return run;
+}
+async function uploadImageNow(relativePath) {
   if (!relativePath) return undefined;
   if (assetCache.has(relativePath)) return assetCache.get(relativePath);
   const filePath = path.join(IMAGES_DIR, relativePath.replace(/^\/images\//, ""));
