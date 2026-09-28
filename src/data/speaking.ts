@@ -133,7 +133,7 @@ export const formats: Format[] = [
 
 export const email = "leochenlc0402@gmail.com";
 
-export function buildMailtoHref() {
+export function buildMailtoHref(toEmail: string = email) {
   const subject = encodeURIComponent("演講邀約｜〔單位名稱〕");
   const bodyLines = [
     "陳荐宏老師您好，想邀請您進行演講／分享，活動資訊如下：",
@@ -149,5 +149,5 @@ export function buildMailtoHref() {
     "謝謝您！",
   ];
   const body = encodeURIComponent(bodyLines.join("\n"));
-  return `mailto:${email}?subject=${subject}&body=${body}`;
+  return `mailto:${toEmail}?subject=${subject}&body=${body}`;
 }

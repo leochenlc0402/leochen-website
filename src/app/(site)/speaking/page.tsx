@@ -4,42 +4,51 @@ import Section from "@/components/Section";
 import Heading from "@/components/Heading";
 import SpecTable from "@/components/SpecTable";
 import CTALink from "@/components/CTALink";
-import { topics } from "@/data/topics";
-import { clientColumns, cityLogos } from "@/data/clients";
-import { profile } from "@/data/profile";
-import {
-  inquiryIntro,
-  inquiryNote,
-  inquiryFields,
-  emailChannelNote,
-  replyNote,
-  feeIntro,
-  publicSectorFees,
-  corporateFeeNote,
-  transportFees,
-  formats,
-  buildMailtoHref,
-} from "@/data/speaking";
+import { profile as profileFallback } from "@/data/profile";
+import { buildMailtoHref } from "@/data/speaking";
+import { getSpeakingData, getTopicsData, getClientsData } from "@/sanity/lib/pageData";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "演講邀約",
   description:
     "陳荐宏 Leo Chen 演講邀約說明：來信需附資訊、演講費用（公務機關 4,000 元起）、四大講題與感謝邀請單位名單。",
   openGraph: {
-    title: `演講邀約｜${profile.displayName}`,
+    title: `演講邀約｜${profileFallback.displayName}`,
     description: "性別平等與 CEDAW、多元性別、性別與日常生活、媒體社群與內容創作，四大講題歡迎來信邀約。",
     type: "website",
   },
 };
 
-export default function SpeakingPage() {
+export default async function SpeakingPage() {
+  const [speaking, topics, clients] = await Promise.all([
+    getSpeakingData(),
+    getTopicsData(),
+    getClientsData(),
+  ]);
+  const {
+    email,
+    inquiryIntro,
+    inquiryNote,
+    inquiryFields,
+    emailChannelNote,
+    replyNote,
+    feeIntro,
+    publicSectorFees,
+    corporateFeeNote,
+    transportFees,
+    formats,
+  } = speaking;
+  const { clientColumns, cityLogos } = clients;
+
   return (
     <div>
       {/* 頁首（navy） */}
       <Section className="navy page-head">
         <Heading as="h1" formal="演講邀約" casual="歡迎寫信邀約，期待我們的緣分即將開始。" />
         <div className="mt-8">
-          <CTALink href={buildMailtoHref()} className="btn">
+          <CTALink href={buildMailtoHref(email)} className="btn">
             寫信邀請 →
           </CTALink>
         </div>
@@ -110,24 +119,24 @@ export default function SpeakingPage() {
             <p className="fit">{topic.fit}</p>
             <p className="s">{topic.subtopics.join("、")}</p>
             <div className="cover-pairs">
-              {topic.coverSlugs.map((slug) => (
-                <div className="cover-pair" key={slug}>
+              {topic.coverPairs.map((pair, j) => (
+                <div className="cover-pair" key={j}>
                   <div className="cover-img">
                     <Image
-                      src={`/images/covers/${slug}-cover.jpg`}
+                      src={pair.cover.src}
                       alt={`${topic.title} 簡報封面`}
                       fill
                       sizes="(max-width: 760px) 45vw, 22vw"
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", objectPosition: pair.cover.objectPosition }}
                     />
                   </div>
                   <div className="cover-img">
                     <Image
-                      src={`/images/covers/${slug}-inner.jpg`}
+                      src={pair.inner.src}
                       alt={`${topic.title} 簡報內頁`}
                       fill
                       sizes="(max-width: 760px) 45vw, 22vw"
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", objectPosition: pair.inner.objectPosition }}
                     />
                   </div>
                 </div>
@@ -164,10 +173,10 @@ export default function SpeakingPage() {
           <Heading formal="謝謝這些單位的邀請" casual="政府、學校、企業都有" />
         </div>
         <div className="logos">
-          {cityLogos.map((logo) => (
-            <div className="logo-img" key={logo.slug}>
+          {cityLogos.map((logo, i) => (
+            <div className="logo-img" key={i}>
               <Image
-                src={`/images/logo-${logo.slug}.png`}
+                src={logo.src}
                 alt={logo.name}
                 fill
                 sizes="120px"

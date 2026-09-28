@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { LXGW_WenKai_TC, Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import EndCTA from "@/components/EndCTA";
-import NoOrphans from "@/components/NoOrphans";
 import { profile } from "@/data/profile";
 
 // 三個字型掛成設計系統鎖定的 token 名稱：--font-serif / --font-sans / --font-voice。
@@ -51,6 +48,8 @@ export const metadata: Metadata = {
     : {}),
 };
 
+// 這裡只放全站共用的 html/body 外殼與字型——網站的 Header／EndCTA／NoOrphans
+// 移到 src/app/(site)/layout.tsx，讓 /studio 路由不會被套上這層網站外框。
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -60,10 +59,7 @@ export default function RootLayout({
       className={`${notoSerifTC.variable} ${notoSansTC.variable} ${wenKaiTC.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-[var(--color-paper)] text-[var(--color-navy)]">
-        <Header />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <EndCTA />
-        <NoOrphans />
+        {children}
       </body>
     </html>
   );

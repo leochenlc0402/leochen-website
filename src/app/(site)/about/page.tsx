@@ -3,33 +3,38 @@ import Image from "next/image";
 import Section from "@/components/Section";
 import Heading from "@/components/Heading";
 import SpecTable from "@/components/SpecTable";
-import { profile } from "@/data/profile";
-import { aboutIntro } from "@/data/about";
-import {
-  workExperience,
-  education,
-  publicService,
-  privateService,
-  qualifications,
-  hostingPublicSector,
-  hostingEntertainment,
-  publishedBook,
-  policyConsulting,
-  papers,
-} from "@/data/experience";
+import { profile as profileFallback } from "@/data/profile";
+import { getSiteProfile, getAboutData } from "@/sanity/lib/pageData";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "關於里歐",
   description:
     "陳荐宏 Leo Chen 的完整經歷：工作經歷、學歷、公部門與民間服務、專業資格、主持經歷、出版與研究。",
   openGraph: {
-    title: `關於里歐｜${profile.displayName}`,
+    title: `關於里歐｜${profileFallback.displayName}`,
     description: "性平講師陳荐宏 Leo Chen 的完整經歷總覽。",
     type: "profile",
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [profile, about] = await Promise.all([getSiteProfile(), getAboutData()]);
+  const {
+    aboutIntro,
+    workExperience,
+    education,
+    publicService,
+    privateService,
+    qualifications,
+    hostingPublicSector,
+    hostingEntertainment,
+    publishedBook,
+    policyConsulting,
+    papers,
+  } = about;
+
   return (
     <div>
       {/* 頁首（navy）：文楷金色小字＋宋體大標＋右側形象照 */}
@@ -41,11 +46,11 @@ export default function AboutPage() {
           </div>
           <div className="ph">
             <Image
-              src={profile.aboutImage}
+              src={profile.aboutImage.src}
               alt={`${profile.displayName} 形象照`}
               fill
               sizes="(max-width: 760px) 100vw, 30vw"
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", objectPosition: profile.aboutImage.objectPosition }}
               priority
             />
           </div>

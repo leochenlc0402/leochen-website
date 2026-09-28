@@ -5,51 +5,28 @@ import Section from "@/components/Section";
 import Heading from "@/components/Heading";
 import CTALink from "@/components/CTALink";
 import StatCounter from "@/components/StatCounter";
-import { profile } from "@/data/profile";
-import { stats } from "@/data/stats";
-import { topics } from "@/data/topics";
-import { formats } from "@/data/speaking";
-import { testimonials } from "@/data/testimonials";
-import { identityRows, credo } from "@/data/identity";
+import { profile as profileFallback } from "@/data/profile";
 import {
-  clientsSummaryLine,
-  cityLogos,
-  referralCount,
-  referralLeadLines,
-  referralNote,
-} from "@/data/clients";
-import { heroFormal, heroCasual, heroSubhead } from "@/data/homepage";
+  getSiteProfile,
+  getHomepageData,
+  getTopicsData,
+  getFormatsData,
+  getClientsData,
+} from "@/sanity/lib/pageData";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: `${profile.displayName} — ${profile.title}`,
+  title: `${profileFallback.displayName} — ${profileFallback.title}`,
   description:
     "陳荐宏 Leo Chen：性平講師 × 社群媒體創作者。政府性平委員、夫夫之道共同創辦人、公開同志伴侶——三個身份一起作證的性平講師。",
   openGraph: {
-    title: `${profile.displayName} — ${profile.title}`,
+    title: `${profileFallback.displayName} — ${profileFallback.title}`,
     description:
       "把法定必修，講成大家想聽的那一堂。80 多場演講經驗，性平講師陳荐宏 Leo Chen 個人網站首頁。",
     type: "profile",
   },
 };
-
-// 授課現場照片條：每張都裁成 4:5，x 位置對準拿麥克風的講者（里歐），讓他落在畫面中央。
-// 位置是逐張看圖量出來的，換照片時要重新量。
-const stripImages = [
-  { src: "/images/audience.jpg", x: 93 },
-  { src: "/images/sign.jpg", x: 88 },
-  { src: "/images/pink-screen.jpg", x: 78 },
-  { src: "/images/diverse.jpg", x: 38 },
-  { src: "/images/rainbow-mic.jpg", x: 75 },
-  { src: "/images/overalls.jpg", x: 41 },
-  { src: "/images/chair.jpg", x: 50 },
-  { src: "/images/pink-mic.jpg", x: 76 },
-];
-
-// 兩排跑馬燈的內容，取自 src/data/testimonials.ts（未新增任何一句），
-// 分組與定稿靜態稿 final-home.html 一致；每排把內容自我複製一次，
-// 讓 CSS `translateX(-50%)` 可以無縫循環。
-const rowA = [testimonials[0], testimonials[2], testimonials[5], testimonials[4]];
-const rowB = [testimonials[1], testimonials[3], testimonials[2]];
 
 function MarqueeRow({ items, variant }: { items: string[]; variant?: "b" }) {
   const doubled = [...items, ...items];
@@ -65,8 +42,25 @@ function MarqueeRow({ items, variant }: { items: string[]; variant?: "b" }) {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const [profile, homepage, topics, formats, clients] = await Promise.all([
+    getSiteProfile(),
+    getHomepageData(),
+    getTopicsData(),
+    getFormatsData(),
+    getClientsData(),
+  ]);
+
+  const { heroFormal, heroCasual, heroSubhead, stats, stripImages, testimonials, identityRows, credo } =
+    homepage;
+  const { clientsSummaryLine, cityLogos, referralCount, referralLeadLines, referralNote } = clients;
+
   const [heroCasualBefore, heroCasualAfter] = heroCasual.split("好玩");
+
+  // 兩排跑馬燈的內容，取自首頁 testimonials（未新增任何一句），分組與定稿靜態稿一致；
+  // 每排把內容自我複製一次，讓 CSS `translateX(-50%)` 可以無縫循環。
+  const rowA = [testimonials[0], testimonials[2], testimonials[5], testimonials[4]];
+  const rowB = [testimonials[1], testimonials[3], testimonials[2]];
 
   return (
     <div>
@@ -96,11 +90,11 @@ export default function Home() {
             </div>
             <div className="portrait">
               <Image
-                src={profile.heroImage}
+                src={profile.heroImage.src}
                 alt={`${profile.displayName} 形象照`}
                 fill
                 sizes="(max-width: 760px) 100vw, 40vw"
-                style={{ objectFit: "cover", objectPosition: "50% 20%" }}
+                style={{ objectFit: "cover", objectPosition: profile.heroImage.objectPosition }}
                 priority
               />
             </div>
@@ -115,14 +109,14 @@ export default function Home() {
         ))}
       </Section>
       <div className="strip">
-        {stripImages.map(({ src, x }) => (
-          <div className="strip-img" key={src}>
+        {stripImages.map((img, i) => (
+          <div className="strip-img" key={i}>
             <Image
-              src={src}
+              src={img.src}
               alt=""
               fill
               sizes="(max-width: 760px) 176px, 288px"
-              style={{ objectFit: "cover", objectPosition: `${x}% 50%` }}
+              style={{ objectFit: "cover", objectPosition: img.objectPosition }}
             />
           </div>
         ))}
@@ -148,11 +142,11 @@ export default function Home() {
           <div className={row.reverse ? "who-row rev" : "who-row"} key={row.role}>
             <div className="ph">
               <Image
-                src={row.image}
+                src={row.image.src}
                 alt=""
                 fill
                 sizes="(max-width: 760px) 100vw, 45vw"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "cover", objectPosition: row.image.objectPosition }}
               />
             </div>
             <div>
@@ -193,14 +187,14 @@ export default function Home() {
               <p className="s">{topic.homeSummary}</p>
             </div>
             <div className="covers">
-              {topic.homeCovers.map((src) => (
-                <div className="cover-img" key={src}>
+              {topic.homeCovers.map((cover, i) => (
+                <div className="cover-img" key={i}>
                   <Image
-                    src={src}
+                    src={cover.src}
                     alt=""
                     fill
                     sizes="(max-width: 760px) 45vw, 25vw"
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: "cover", objectPosition: cover.objectPosition }}
                   />
                 </div>
               ))}
@@ -247,10 +241,10 @@ export default function Home() {
           </div>
         </div>
         <div className="logos">
-          {cityLogos.map((logo) => (
-            <div className="logo-img" key={logo.slug}>
+          {cityLogos.map((logo, i) => (
+            <div className="logo-img" key={i}>
               <Image
-                src={`/images/logo-${logo.slug}.png`}
+                src={logo.src}
                 alt={logo.name}
                 fill
                 sizes="120px"

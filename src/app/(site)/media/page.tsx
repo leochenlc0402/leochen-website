@@ -2,21 +2,25 @@ import type { Metadata } from "next";
 import Section from "@/components/Section";
 import Heading from "@/components/Heading";
 import CTALink from "@/components/CTALink";
-import { videoWorks, pressItems, podcast, getYoutubeEmbedId } from "@/data/media";
-import { profile } from "@/data/profile";
+import { profile as profileFallback } from "@/data/profile";
+import { getMediaData } from "@/sanity/lib/pageData";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "作品與報導",
   description:
     "陳荐宏 Leo Chen 的影音作品（含 113 年度勞動人權短片徵選比賽銀獎）、媒體報導與心靈處方籤 Podcast。",
   openGraph: {
-    title: `作品與報導｜${profile.displayName}`,
+    title: `作品與報導｜${profileFallback.displayName}`,
     description: "職場性騷擾主題影音作品、媒體報導與 Podcast 一覽。",
     type: "website",
   },
 };
 
-export default function MediaPage() {
+export default async function MediaPage() {
+  const { videoWorks, pressItems, podcast } = await getMediaData();
+
   return (
     <div>
       {/* 頁首（navy） */}
@@ -28,17 +32,16 @@ export default function MediaPage() {
       <Section className="resume-block">
         <div className="video-grid">
           {videoWorks.map((video) => {
-            const embedId = getYoutubeEmbedId(video.youtubeUrl);
             return (
               <div className="video-card" key={video.youtubeUrl}>
                 <h3 className="mb-3 font-[family-name:var(--font-serif)] font-bold text-[22px] text-[var(--color-navy)]">
                   {video.title}
                 </h3>
                 <div className="aspect-video bg-[var(--color-paper-2)]">
-                  {embedId && (
+                  {video.embedId && (
                     <iframe
                       className="w-full h-full"
-                      src={`https://www.youtube.com/embed/${embedId}`}
+                      src={`https://www.youtube.com/embed/${video.embedId}`}
                       title={video.title}
                       loading="lazy"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
