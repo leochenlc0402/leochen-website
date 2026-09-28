@@ -718,8 +718,10 @@ h1.hero-h1 .play {
 .values-block {
   padding: var(--sec) 0 0;
 }
-.motto-wrap {
+.usp {
   max-width: 40em;
+  padding-left: 28px;
+  border-left: 3px solid var(--color-gold);
 }
 .motto {
   margin-top: 10px;
@@ -734,31 +736,6 @@ h1.hero-h1 .play {
   font-size: 17px;
   line-height: 1.85;
   color: var(--color-ink-2);
-}
-.values-grid {
-  margin-top: 56px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-}
-.value-card {
-  padding-top: 20px;
-  border-top: 2px solid var(--color-gold);
-}
-.value-label {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--color-teal);
-  margin-bottom: 12px;
-}
-.value-card p:not(.value-label) {
-  font-size: 17px;
-  line-height: 1.85;
-  color: var(--color-ink-2);
-}
-.value-card p:not(.value-label) + p {
-  margin-top: 12px;
 }
 .story {
   padding: var(--sec) 0 32px;
@@ -827,7 +804,7 @@ h1.hero-h1 .play {
 }
 @media (max-width: 760px) {
   .motto { font-size: 28px; }
-  .values-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; }
+  .usp { padding-left: 18px; }
   .story-line li { grid-template-columns: 1fr; gap: 2px; }
   .story-label { text-align: left; padding-top: 0; }
   .hl-grid { grid-template-columns: 1fr 1fr; gap: 28px 16px; }

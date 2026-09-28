@@ -69,31 +69,13 @@ export default async function AboutPage() {
         </div>
       </Section>
 
-      {/* 座右銘／堅持／不一樣的地方：里歐親口回覆，空白的欄位不顯示 */}
-      {(positioning.motto || positioning.persistence.length > 0 || positioning.difference) && (
+      {/* 我的不同（USP）：里歐回覆挑選融合，空白不顯示 */}
+      {positioning.uspTitle && (
         <Section className="values-block">
-          {positioning.motto && (
-            <div className="motto-wrap">
-              <p className="note">座右銘</p>
-              <p className="motto">{positioning.motto}</p>
-              {positioning.mottoNote && <p className="motto-note">{positioning.mottoNote}</p>}
-            </div>
-          )}
-          <div className="values-grid">
-            {positioning.persistence.length > 0 && (
-              <div className="value-card">
-                <p className="value-label">我最堅持的</p>
-                {positioning.persistence.map((t) => (
-                  <p key={t}>{t}</p>
-                ))}
-              </div>
-            )}
-            {positioning.difference && (
-              <div className="value-card">
-                <p className="value-label">我跟別人不一樣的地方</p>
-                <p>{positioning.difference}</p>
-              </div>
-            )}
+          <div className="usp">
+            <p className="note">我的不同</p>
+            <p className="motto">{positioning.uspTitle}</p>
+            {positioning.uspBody && <p className="motto-note">{positioning.uspBody}</p>}
           </div>
         </Section>
       )}
