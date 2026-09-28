@@ -817,6 +817,13 @@ h1.hero-h1 .play {
 .resume-block {
   padding: 64px 0;
 }
+/* 頁尾生活哲學：安靜的一句，文楷、淡金 */
+.end .creed {
+  margin-top: 72px;
+  font-family: var(--font-voice);
+  font-size: 16px;
+  color: color-mix(in srgb, var(--color-gold) 80%, transparent);
+}
 .resume-block + .resume-block {
   border-top: 1px solid var(--color-rule);
 }
@@ -1086,4 +1093,8 @@ h1, h2, h3, h4, .h2, .role, .fmt h4, .spec-row dt, .topic h3, .lead {
 }
 p, li, dd, .note, .chain, .all {
   text-wrap: pretty;
+}
+
+.end .creed + .foot {
+  margin-top: 20px;
 }

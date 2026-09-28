@@ -26,6 +26,7 @@ export default function EndCTA() {
             看費用說明
           </CTALink>
         </div>
+        <p className="creed">{profile.creed}</p>
         <div className="foot">
           <span>© {new Date().getFullYear()} {profile.displayName}</span>
           <span>夫夫之道 Fufuknows · {podcast.name}</span>

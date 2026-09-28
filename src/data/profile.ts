@@ -9,4 +9,6 @@ export const profile = {
   email: "leochenlc0402@gmail.com",
   heroImage: "/images/jacket-wall.jpg",
   aboutImage: "/images/plaid.jpg",
+  // 全站頁尾的一句生活哲學（里歐 2026-09-28 回覆第二題，精簡），安靜放在版權列上方。
+  creed: "吃飯時吃飯，休息時休息。修行，就是用心做好當下的每一件事。",
 } as const;
