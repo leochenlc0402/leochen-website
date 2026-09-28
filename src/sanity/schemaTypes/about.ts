@@ -6,10 +6,63 @@ export const about = defineType({
   title: "關於我",
   type: "document",
   groups: [
+    { name: "positioning", title: "定位與價值觀" },
     { name: "intro", title: "自介全文" },
     { name: "resume", title: "經歷清單" },
   ],
   fields: [
+    defineField({
+      name: "positioning",
+      title: "定位與價值觀（頁面上半部）",
+      type: "object",
+      description: "「關於我」頁最上方，讓人一句話認識你。三格都可以空著，空著就不顯示。",
+      group: "positioning",
+      fields: [
+        defineField({
+          name: "oneLiner",
+          title: "一句話介紹自己",
+          type: "text",
+          rows: 2,
+          description: "顯示在大標「嗨，我是里歐。」下方。空著會改顯示頭銜。",
+        }),
+        defineField({
+          name: "motto",
+          title: "座右銘",
+          type: "text",
+          rows: 2,
+          description: "頁首下方的一句大字引言。",
+        }),
+        defineField({
+          name: "values",
+          title: "核心價值／堅持",
+          type: "array",
+          description: "一條一句，建議三條以內，顯示在座右銘下方。",
+          of: [defineArrayMember({ type: "string" })],
+        }),
+      ],
+    }),
+    defineField({
+      name: "highlights",
+      title: "經歷亮點（數字格）",
+      type: "array",
+      description: "自介下方的數字格，例：300+ 案、28 場。可拖曳調整順序。",
+      group: "resume",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "highlightItem",
+          fields: [
+            defineField({ name: "value", title: "數字或短字", type: "string", description: "例：300+、銀獎。" }),
+            defineField({ name: "unit", title: "單位（選填）", type: "string", description: "例：案、場、縣市。" }),
+            defineField({ name: "label", title: "說明", type: "string" }),
+          ],
+          preview: {
+            select: { value: "value", unit: "unit", label: "label" },
+            prepare: ({ value, unit, label }) => ({ title: `${value ?? ""}${unit ?? ""}`, subtitle: label }),
+          },
+        }),
+      ],
+    }),
     defineField({
       name: "aboutIntro",
       title: "開場自介",
@@ -28,6 +81,13 @@ export const about = defineType({
           title: "頁首大標",
           type: "string",
           description: "例：「嗨，我是里歐。」。",
+        }),
+        defineField({
+          name: "storyLabels",
+          title: "故事線左欄標籤",
+          type: "array",
+          description: "依序對應下面每一段自介，例：「我是誰」「2016」「2021」。",
+          of: [defineArrayMember({ type: "string" })],
         }),
         defineField({
           name: "paragraphs",

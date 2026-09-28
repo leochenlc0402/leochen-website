@@ -23,6 +23,8 @@ export const metadata: Metadata = {
 export default async function AboutPage() {
   const [profile, about] = await Promise.all([getSiteProfile(), getAboutData()]);
   const {
+    positioning,
+    highlights,
     aboutIntro,
     workExperience,
     education,
@@ -44,7 +46,7 @@ export default async function AboutPage() {
           <div>
             <p className="note">{aboutIntro.kicker}</p>
             <h1 className="h2">{aboutIntro.greeting}</h1>
-            <p className="sub">{profile.title}</p>
+            <p className="sub">{positioning.oneLiner || profile.title}</p>
             <div className="actions">
               <CTALink href="/speaking" className="btn">
                 邀請演講 →
@@ -67,18 +69,62 @@ export default async function AboutPage() {
         </div>
       </Section>
 
-      {/* 自介全文逐字 */}
-      <Section className="about-copy">
-        <div className="narrow">
-          {aboutIntro.paragraphs.map((p) => (
-            <p key={p}>{p}</p>
+      {/* 座右銘與核心價值：里歐在後台填了才顯示 */}
+      {(positioning.motto || positioning.values.length > 0) && (
+        <Section className="values-block">
+          {positioning.motto && <p className="motto">{positioning.motto}</p>}
+          {positioning.values.length > 0 && (
+            <ul className="values-list">
+              {positioning.values.map((v) => (
+                <li key={v}>{v}</li>
+              ))}
+            </ul>
+          )}
+        </Section>
+      )}
+
+      {/* 我的故事：自介全文逐字，依時間排成故事線 */}
+      <Section className="story">
+        <div className="head">
+          <Heading formal="我的故事" casual="從影像出發，一路走進公共倡議" />
+        </div>
+        <ol className="story-line">
+          {aboutIntro.paragraphs.map((p, i) => (
+            <li key={p}>
+              <span className="story-label">{aboutIntro.storyLabels?.[i] ?? ""}</span>
+              <div className="story-body">
+                <p>{p}</p>
+              </div>
+            </li>
           ))}
-          <p>
-            {aboutIntro.beliefPrefix}
-            <span className="accent-coral">{aboutIntro.beliefLine}</span>
-          </p>
-          <p>{aboutIntro.closing}</p>
-          <p className="hours-note">{aboutIntro.hoursNote}</p>
+          <li className="story-belief">
+            <span className="story-label">我相信</span>
+            <div className="story-body">
+              <p>
+                {aboutIntro.beliefPrefix}
+                <span className="accent-coral">{aboutIntro.beliefLine}</span>
+              </p>
+              <p>{aboutIntro.closing}</p>
+            </div>
+          </li>
+        </ol>
+      </Section>
+
+      {/* 經歷亮點：數字全取自里歐提供的自介與經歷 */}
+      <Section className="highlights">
+        <div className="head">
+          <Heading formal="經歷亮點" casual="十年來累積的實績" />
+        </div>
+        <div className="hl-grid">
+          {highlights.map((h) => (
+            <div className="hl" key={h.label}>
+              <b>
+                {h.value}
+                {h.unit && <em>{h.unit}</em>}
+              </b>
+              <span>{h.label}</span>
+            </div>
+          ))}
         </div>
       </Section>
 

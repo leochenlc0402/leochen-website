@@ -23,7 +23,9 @@ export const HOMEPAGE_QUERY = /* groq */ `*[_type == "homepage"][0]{
 }`;
 
 export const ABOUT_QUERY = /* groq */ `*[_type == "about"][0]{
-  aboutIntro{kicker, greeting, paragraphs, beliefPrefix, beliefLine, closing, hoursNote},
+  positioning{oneLiner, motto, values},
+  highlights[]{value, unit, label},
+  aboutIntro{kicker, greeting, storyLabels, paragraphs, beliefPrefix, beliefLine, closing, hoursNote},
   workExperience[]{org, role},
   education[]{school, degree},
   publicService,

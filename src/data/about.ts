@@ -16,4 +16,26 @@ export const aboutIntro = {
   closing:
     "而教育的意義，是提供一個重新認識自己、理解他人，也重新看見這個社會的機會。",
   hoursNote: "目前累計 175 小時以上的演講時數。",
+  // 故事線左欄的標籤，依序對應上面 paragraphs（2026-09-28 關於頁改成故事線排版）。
+  storyLabels: ["我是誰", "2016", "2021"],
 };
+
+// 關於頁上半部「一句話認識他／定位／價值觀」。內容等里歐親口提供（2026-09-28 已請創晃去問），
+// 目前留空：空白時網站不顯示這一塊，里歐在後台填了就會自動出現。
+export const positioning: { oneLiner: string; motto: string; values: string[] } = {
+  oneLiner: "",
+  motto: "",
+  values: [],
+};
+
+// 經歷亮點：數字全部取自里歐提供的自介與經歷清單，不另外新增事實。
+// 300+ 案出自自介第三段；2 縣市性平委員出自公部門服務；3 縣市出自專業資格；
+// 28 場＝主持經歷公務機關 12 場＋娛樂產業 16 場；銀獎出自影音作品；175+ 出自演講時數。
+export const highlights: { value: string; unit?: string; label: string }[] = [
+  { value: "300+", unit: "案", label: "促成各縣市議會性平相關質詢與提案" },
+  { value: "2", unit: "縣市", label: "地方政府性別平等委員（新竹市、雲林縣）" },
+  { value: "3", unit: "縣市", label: "性別人才資料庫專家學者（宜蘭、新竹、雲林）" },
+  { value: "28", unit: "場", label: "記者會、見面會、遊行主舞台主持" },
+  { value: "銀獎", label: "113 年度勞動人權短片徵選比賽" },
+  { value: "175+", unit: "小時", label: "累計演講時數" },
+];

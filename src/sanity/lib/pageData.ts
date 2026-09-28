@@ -38,7 +38,11 @@ import {
   schoolClients as schoolClientsFallback,
   ngoClients as ngoClientsFallback,
 } from "@/data/clients";
-import { aboutIntro as aboutIntroFallback } from "@/data/about";
+import {
+  aboutIntro as aboutIntroFallback,
+  positioning as positioningFallback,
+  highlights as highlightsFallback,
+} from "@/data/about";
 import {
   workExperience as workExperienceFallback,
   education as educationFallback,
@@ -382,6 +386,8 @@ export async function getClientsData() {
 // ---------- 關於我（about） ----------
 
 type AboutDoc = {
+  positioning?: Partial<typeof positioningFallback>;
+  highlights?: typeof highlightsFallback;
   aboutIntro?: typeof aboutIntroFallback;
   workExperience?: { org: string; role: string }[];
   education?: { school: string; degree: string }[];
@@ -400,10 +406,13 @@ export async function getAboutData() {
 
   const aboutIntro = mergeWithFallback(doc?.aboutIntro ?? null, aboutIntroFallback);
   const publishedBook = mergeWithFallback(doc?.publishedBook ?? null, publishedBookFallback);
+  const positioning = mergeWithFallback(doc?.positioning ?? null, positioningFallback);
 
   return mergeWithFallback(
     doc
       ? {
+          positioning,
+          highlights: doc.highlights,
           aboutIntro,
           workExperience: doc.workExperience,
           education: doc.education,
@@ -418,6 +427,8 @@ export async function getAboutData() {
         }
       : null,
     {
+      positioning: positioningFallback,
+      highlights: highlightsFallback,
       aboutIntro: aboutIntroFallback,
       workExperience: workExperienceFallback as unknown as { org: string; role: string }[],
       education: educationFallback as unknown as { school: string; degree: string }[],
