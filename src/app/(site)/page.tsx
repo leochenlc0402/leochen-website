@@ -136,7 +136,7 @@ export default async function Home() {
       {/* 4. 為什麼是他 */}
       <Section className="who">
         <div className="head">
-          <Heading formal="為什麼選擇我" casual="三個身分，不同面的我" />
+          <Heading formal="為什麼選擇我" casual="三個身分，不同面向的我" />
         </div>
         {identityRows.map((row) => (
           <div className={row.reverse ? "who-row rev" : "who-row"} key={row.role}>

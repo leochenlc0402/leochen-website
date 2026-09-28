@@ -28,7 +28,7 @@ export const identityRows: IdentityRow[] = [
   },
   {
     role: "當事人",
-    roleNote: "講的是自己的人生",
+    roleNote: "生命故事躍上簡報",
     body: "公開的同志伴侶，和阿凱一起寫下《不OK的我們也很好》，把長跑九年的關係練習攤開來講。講多元家庭與伴侶關係時，我不是在念教材。",
     keywords: "多元性別 · 伴侶關係 · 婚姻平權",
     image: "/images/book.jpg",

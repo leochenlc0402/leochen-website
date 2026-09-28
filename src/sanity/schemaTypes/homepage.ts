@@ -132,7 +132,7 @@ export const homepage = defineType({
       name: "identityRows",
       title: "為什麼選擇我（三個身分）",
       type: "array",
-      description: "首頁「三個身分，不同面的我」區塊，每一列一張圖＋一段介紹。",
+      description: "首頁「三個身分，不同面向的我」區塊，每一列一張圖＋一段介紹。",
       group: "identity",
       of: [
         defineArrayMember({
