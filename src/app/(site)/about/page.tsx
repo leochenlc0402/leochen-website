@@ -3,6 +3,7 @@ import Image from "next/image";
 import Section from "@/components/Section";
 import Heading from "@/components/Heading";
 import SpecTable from "@/components/SpecTable";
+import CTALink from "@/components/CTALink";
 import { profile as profileFallback } from "@/data/profile";
 import { getSiteProfile, getAboutData } from "@/sanity/lib/pageData";
 
@@ -43,6 +44,15 @@ export default async function AboutPage() {
           <div>
             <p className="note">{aboutIntro.kicker}</p>
             <h1 className="h2">{aboutIntro.greeting}</h1>
+            <p className="sub">{profile.title}</p>
+            <div className="actions">
+              <CTALink href="/speaking" className="btn">
+                邀請演講 →
+              </CTALink>
+              <CTALink href="/#topics-home" className="link">
+                看四個講題
+              </CTALink>
+            </div>
           </div>
           <div className="ph">
             <Image

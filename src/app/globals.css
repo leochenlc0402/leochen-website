@@ -222,7 +222,7 @@ h1.hero-h1 .play {
 /* about 頁頁首：文字＋右側形象照兩欄 */
 .page-head-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 1fr minmax(0, 440px);
   gap: 48px;
   align-items: center;
 }
@@ -231,6 +231,9 @@ h1.hero-h1 .play {
   aspect-ratio: 3 / 4;
   border-radius: 4px;
   overflow: hidden;
+}
+.page-head-grid .actions {
+  padding-bottom: 0;
 }
 .page-head-grid .ph img {
   object-fit: cover;

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // 避免段落最後一行只剩一個字（創晃 2026-09-27 規則）。
-// 支援 CSS `text-wrap: pretty` 的瀏覽器由 globals.css 處理；不支援的瀏覽器（較舊的 Safari 等）
-// 才在這裡把每段最後兩個字（連同句尾標點）包成不換行，讓最後一行至少兩個字。
-// 網址加 ?noorphan=force 可在支援的瀏覽器上強制啟用，方便測試。
-const SELECTOR = "main p, main li, main dd, main dt, main h1, main h2, main h3, main h4";
+// 一律在這裡把每段最後兩個字（連同句尾標點）包成不換行，讓最後一行至少兩個字。
+// 2026-09-28：Safari 雖然回報支援 `text-wrap: pretty`，中文段落仍會落單一字（首頁信念句實測），
+// 所以不再依瀏覽器支援度跳過，所有瀏覽器都跑。
+const SELECTOR = "main p, main li, main dd, main dt, main h1, main h2, main h3, main h4, footer p, footer h2";
 const PUNCT = /[\s，。、：；！？「」『』（）()《》〈〉／・·,.:;!?\-–—→]/;
 
 function fixElement(el: Element) {
@@ -35,10 +36,11 @@ function fixElement(el: Element) {
 }
 
 export default function NoOrphans() {
+  const pathname = usePathname();
   useEffect(() => {
-    const force = new URLSearchParams(window.location.search).get("noorphan") === "force";
-    if (!force && CSS.supports("text-wrap", "pretty")) return;
-    document.querySelectorAll(SELECTOR).forEach(fixElement);
-  }, []);
+    // 站內換頁時版面外框不會重新掛載，所以跟著網址重跑；等新頁面畫完再處理。
+    const id = requestAnimationFrame(() => document.querySelectorAll(SELECTOR).forEach(fixElement));
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
   return null;
 }
