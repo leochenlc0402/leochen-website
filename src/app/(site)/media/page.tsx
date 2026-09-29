@@ -8,6 +8,7 @@ import { getMediaData } from "@/sanity/lib/pageData";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/media" },
   title: "作品與報導",
   description:
     "陳荐宏 Leo Chen 的影音作品（含 113 年度勞動人權短片徵選比賽銀獎）、媒體報導與心靈處方籤 Podcast。",

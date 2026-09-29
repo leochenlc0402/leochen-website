@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/studio",
     },
-    sitemap: "https://leochen.example/sitemap.xml",
+    sitemap: "https://leochen.genderequity.tw/sitemap.xml",
   };
 }

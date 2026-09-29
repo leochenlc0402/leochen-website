@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl = "https://leochen.example";
+const baseUrl = "https://leochen.genderequity.tw";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about", "/speaking", "/media"];

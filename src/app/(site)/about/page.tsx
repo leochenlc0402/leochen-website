@@ -10,6 +10,7 @@ import { getSiteProfile, getAboutData } from "@/sanity/lib/pageData";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "關於里歐",
   description:
     "陳荐宏 Leo Chen 的完整經歷：工作經歷、學歷、公部門與民間服務、專業資格、主持經歷、出版與研究。",

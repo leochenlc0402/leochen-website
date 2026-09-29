@@ -11,6 +11,7 @@ import { getSpeakingData, getTopicsData, getClientsData } from "@/sanity/lib/pag
 export const revalidate = 60;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/speaking" },
   title: "演講邀約",
   description:
     "陳荐宏 Leo Chen 演講邀約說明：來信需附資訊、演講費用（公務機關 4,000 元起）、四大講題與感謝邀請單位名單。",

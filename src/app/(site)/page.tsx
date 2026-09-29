@@ -17,6 +17,7 @@ import {
 export const revalidate = 60;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   title: `${profileFallback.displayName} — ${profileFallback.title}`,
   description:
     "陳荐宏 Leo Chen：性平講師 × 社群媒體創作者。政府性平委員、夫夫之道共同創辦人、公開同志伴侶——三個身份一起作證的性平講師。",

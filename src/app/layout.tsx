@@ -27,7 +27,7 @@ const wenKaiTC = LXGW_WenKai_TC({
 const noindex = process.env.NEXT_PUBLIC_NOINDEX === "1";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://leochen.example"),
+  metadataBase: new URL("https://leochen.genderequity.tw"),
   title: {
     default: `${profile.displayName} — ${profile.title}`,
     template: `%s｜${profile.displayName}`,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: `${profile.displayName} — ${profile.title}`,
     description:
       "把法定必修，講成大家想聽的那一堂。80 多場演講經驗，性平講師陳荐宏 Leo Chen 個人網站首頁。",
-    url: "https://leochen.example",
+    url: "https://leochen.genderequity.tw",
     siteName: profile.displayName,
     locale: "zh_TW",
     type: "website",
