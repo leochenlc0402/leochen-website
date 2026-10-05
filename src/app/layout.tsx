@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     locale: "zh_TW",
     type: "website",
   },
+  // Google Search Console 網域擁有權驗證（HTML 標記法），移除會讓 Search Console 失去驗證。
+  verification: {
+    google: "upJBnEp91tEmrgm0wo9wlGjuXulUEPQpQ9gwahpWXlo",
+  },
   ...(noindex
     ? { robots: { index: false, follow: false } }
     : {}),
