@@ -1098,3 +1098,84 @@ p, li, dd, .note, .chain, .all {
 .end .creed + .foot {
   margin-top: 20px;
 }
+
+/* ---------- 收尾區訂閱欄（2026-10-06，資料進 Google 表單） ---------- */
+.subscribe {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(246, 241, 232, 0.14);
+  max-width: 920px;
+}
+.subscribe-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--color-paper);
+}
+.subscribe-desc {
+  margin-top: 8px;
+  font-size: 16px;
+  color: var(--color-cream-dim);
+}
+.subscribe-form {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr auto;
+  gap: 12px;
+}
+.subscribe-form input {
+  min-width: 0;
+  padding: 14px 16px;
+  border-radius: 3px;
+  border: 1px solid rgba(246, 241, 232, 0.28);
+  background: rgba(246, 241, 232, 0.06);
+  color: var(--color-paper);
+  font-size: 16px;
+}
+.subscribe-form input::placeholder {
+  color: rgba(246, 241, 232, 0.55);
+}
+.subscribe-form input:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.subscribe-form .btn {
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+.subscribe-form .btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+.subscribe-privacy {
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(246, 241, 232, 0.55);
+}
+.subscribe-error {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--color-coral);
+}
+.subscribe-done {
+  font-family: var(--font-voice);
+  font-size: 19px;
+  color: var(--color-gold);
+}
+.subscribe + .creed {
+  margin-top: 56px;
+}
+@media (max-width: 760px) {
+  .subscribe {
+    margin-top: 48px;
+    padding-top: 32px;
+  }
+  .subscribe-title {
+    font-size: 20px;
+  }
+  .subscribe-form {
+    grid-template-columns: 1fr;
+  }
+}

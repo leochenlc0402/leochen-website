@@ -2,6 +2,7 @@ import CTALink from "@/components/CTALink";
 import { profile } from "@/data/profile";
 import { podcast } from "@/data/media";
 import { buildMailtoHref } from "@/data/speaking";
+import SubscribeForm from "@/components/SubscribeForm";
 
 // 收尾（全站共用，section 9）：照定稿靜態稿 final-home.html 一比一，
 // 放在 layout.tsx 裡，四頁都會自動接到同一份收尾＋頁尾。
@@ -26,6 +27,7 @@ export default function EndCTA() {
             看費用說明
           </CTALink>
         </div>
+        <SubscribeForm />
         <p className="creed">{profile.creed}</p>
         <div className="foot">
           <span>© {new Date().getFullYear()} {profile.displayName}</span>
